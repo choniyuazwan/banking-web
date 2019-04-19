@@ -1,0 +1,24 @@
+{
+  "obj": [
+            {
+                "name": "choniyu",
+                "online": true
+            },
+            {
+                "name": "azwan",
+                "online": true
+            },
+            {
+                "name": "budi",
+                "online": false
+            },
+            {
+                "name": "ani",
+                "online": true
+            },
+            {
+                "name": "joko",
+                "online": false
+            }
+        ]
+}

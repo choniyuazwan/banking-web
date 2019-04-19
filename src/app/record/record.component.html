@@ -1,0 +1,12 @@
+<table style="border: solid 1px black">
+  <tr>
+    <td>S No.</td>
+    <td>Name</td>
+    <td>Is Online ?</td>
+  </tr>
+  <tr *ngFor="let record of records; let myIndex = index; let firstRecord = first; let lastRecord = last;">
+    <td>{{myIndex+1}}</td>
+    <td>{{record.name}}</td>
+    <td>{{record.online}}</td>
+  </tr>
+</table>

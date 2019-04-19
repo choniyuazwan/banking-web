@@ -9,11 +9,14 @@ import { FormsModule } from '@angular/forms';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
 import { SidenavComponent } from './sidenav/sidenav.component';
+import { RecordComponent } from './record/record.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
     SidenavComponent,
+    RecordComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,7 +29,8 @@ import { SidenavComponent } from './sidenav/sidenav.component';
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
