@@ -8,9 +8,9 @@
             <mat-label>Email</mat-label>
             <input matInput formControlName="email" required>
             <mat-hint align="end">Create email</mat-hint>
-            <!-- <mat-error *ngIf="email.invalid">
+            <mat-error *ngIf="email.invalid">
               your email does not look right
-            </mat-error> -->
+            </mat-error>
           </mat-form-field>
         </p>
 
@@ -19,9 +19,10 @@
             <mat-label>Password</mat-label>
             <input type="password" matInput formControlName="password" required>
             <mat-hint align="end">Create password</mat-hint>
-            <!-- <mat-error *ngIf="password.invalid">
-              password cannot be blank
-            </mat-error> -->
+            <mat-error *ngIf="password.invalid && password.touched">
+              <mat-error *ngIf="password.errors?.required">password tidak boleh kosong</mat-error>
+              <mat-error *ngIf="password.errors?.minlength">password minimal 8</mat-error>
+            </mat-error>
           </mat-form-field>
         </p>
 
@@ -30,10 +31,10 @@
             <mat-label>Confirm Password</mat-label>
             <input type="password" matInput formControlName="confirmPassword" required>
             <mat-hint align="end">Input password again</mat-hint>
-            <!-- <mat-error *ngIf="password.invalid">{{getErrorPassword()}}</mat-error> -->
-            <!-- <mat-error *ngIf="password.invalid">
-              password cannot be blank
-            </mat-error> -->
+            <mat-error *ngIf="password.invalid">
+              <mat-error *ngIf="password.errors?.required">password tidak boleh kosong</mat-error>
+              <mat-error *ngIf="password.errors?.minlength">password minimal 8</mat-error>
+            </mat-error>
           </mat-form-field>
         </p>
 

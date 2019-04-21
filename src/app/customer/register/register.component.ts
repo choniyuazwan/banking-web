@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validator, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -20,10 +20,22 @@ export class RegisterComponent implements OnInit {
   // })
 
   registrationForm = this.fb.group({
-    email: ['Azwan'],
-    password: [''],
-    confirmPassword: ['']
+    email: ['Azwan', Validators.required],
+    password: ['', [Validators.required, Validators.minLength(8)]],
+    confirmPassword: ['', [Validators.required, Validators.minLength(8)]]
   })
+
+  get email() {
+    return this.registrationForm.get('email')
+  }
+
+  get password() {
+    return this.registrationForm.get('password')
+  }
+
+  get confirmPassword() {
+    return this.registrationForm.get('confirmPassword')
+  }
 
   register() {
 
