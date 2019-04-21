@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -8,15 +8,21 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor() { }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
   }
 
-  registrationForm = new FormGroup({
-    email: new FormControl('Azwan'),
-    password: new FormControl(''),
-    confirmPassword: new FormControl('')
+  // registrationForm = new FormGroup({
+  //   email: new FormControl('Azwan'),
+  //   password: new FormControl(''),
+  //   confirmPassword: new FormControl('')
+  // })
+
+  registrationForm = this.fb.group({
+    email: ['Azwan'],
+    password: [''],
+    confirmPassword: ['']
   })
 
   register() {
@@ -24,12 +30,6 @@ export class RegisterComponent implements OnInit {
   }
 
   loadApiData() {
-    // this.registrationForm.setValue({
-    //   email: 'Choniyu Azwan',
-    //   password: 'test',
-    //   confirmPassword: 'test'
-    // })
-
     this.registrationForm.patchValue({
       email: 'Choniyu Azwan',
       password: 'test',
