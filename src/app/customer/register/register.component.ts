@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { existEmailValidator } from 'src/app/shared/validator/exist-email';
 import { PasswordValidation } from 'src/app/shared/validator/password-validator';
+import { RegistrationService } from 'src/app/service/registration.service';
 
 @Component({
   selector: 'app-register',
@@ -10,18 +11,38 @@ import { PasswordValidation } from 'src/app/shared/validator/password-validator'
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private _registrationService: RegistrationService) { }
+  registrationForm: FormGroup;
+  ngOnInit() {
+    this.registrationForm = this.fb.group({
+      // firstname: ['', [Validators.required]],
+      // lastname: ['', [Validators.required]],
+      // birthdate: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email, existEmailValidator(/^admin$/)]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      confirmPassword: ['', [Validators.required]],
+      agree: [false, [Validators.requiredTrue]]
+    }, {validator: PasswordValidation.MatchPassword});
+  }
 
-  registrationForm = this.fb.group({
-    email: ['Azwan', [Validators.required, Validators.email, existEmailValidator(/^admin$/)]],
-    password: ['', [Validators.required, Validators.minLength(8)]],
-    confirmPassword: ['', [Validators.required]]
-  }, {validator: PasswordValidation.MatchPassword});
+  get firstname() {
+    return this.registrationForm.get('firstname')
+  }
 
-  ngOnInit() {}
+  get lastname() {
+    return this.registrationForm.get('lastname')
+  }
+
+  get birthdate() {
+    return this.registrationForm.get('birthdate')
+  }
 
   get email() {
     return this.registrationForm.get('email')
+  }
+
+  get agree() {
+    return this.registrationForm.get('agree')
   }
 
   get password() {
@@ -41,5 +62,14 @@ export class RegisterComponent implements OnInit {
       email: 'Choniyu Azwan',
       password: 'test',
     })
+  }
+
+  onSubmit() {
+    console.log(this.registrationForm.value)
+    this._registrationService.register(this.registrationForm.value)
+      .subscribe(
+        response => console.log('success', response),
+        error => console.log('error', error)
+      );
   }
 }

@@ -1,20 +1,20 @@
 <mat-card>
-  <!-- <mat-card-header>
+  <!-- <mat-card-title>Login</mat-card-title> -->
+  <mat-card-header>
     <mat-card-title>Login</mat-card-title>
-  </mat-card-header> -->
-  <mat-card-title>Login</mat-card-title>
+  </mat-card-header>
   <mat-card-content>
-    <!-- <form [formGroup]="myForm" (ngSubmit)="login()"> -->
-    <form [formGroup]="myForm">
-      Value: {{myForm.value | json}}
+    <!-- <form [formGroup]="loginForm" (ngSubmit)="login()"> -->
+    <form [formGroup]="loginForm">
+      <!-- Value: {{loginForm.value | json}} -->
       <p>
         <mat-form-field appearance="outline">
           <mat-label>Email</mat-label>
-          <input matInput formControlName="email" required>
+          <input matInput formControlName="email">
           <mat-hint align="end">Input your email</mat-hint>
-          <!-- <mat-error *ngIf="email.invalid">{{getErrorEmail()}}</mat-error> -->
           <mat-error *ngIf="email.invalid">
-            your email does not look right
+              <mat-error *ngIf="loginForm.controls['email'].errors?.required">Email is required</mat-error>
+              <mat-error *ngIf="loginForm.controls['email'].errors?.email">Email is not valid</mat-error>
           </mat-error>
         </mat-form-field>
       </p>
@@ -22,26 +22,19 @@
       <p>
         <mat-form-field appearance="outline">
           <mat-label>Password</mat-label>
-          <input type="password" matInput formControlName="password" required>
+          <input [type]="hide ? 'password' : 'text'" matInput formControlName="password">
+          <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           <mat-hint align="end">Input your password</mat-hint>
-          <!-- <mat-error *ngIf="password.invalid">{{getErrorPassword()}}</mat-error> -->
           <mat-error *ngIf="password.invalid">
-            password cannot be blank
+            <mat-error *ngIf="loginForm.controls['password'].errors?.required">Password is required</mat-error>
           </mat-error>
         </mat-form-field>
       </p>
 
-      <p>
-        <mat-checkbox formControlName="agree">
-          I accept terms and conditions
-        </mat-checkbox>
-        <mat-error *ngIf="agree.invalid">
-          you have to agree
-        </mat-error>
-      </p>
-
       <div class="button">
-        <button type="submit" mat-raised-button [disabled]="myForm.invalid" color="primary" (click)="login()">Login</button>
+        <button type="submit" mat-raised-button [disabled]="loginForm.invalid" color="primary" (click)="login()">Login</button>
+        <span class="spacer"></span>
+        <a mat-raised-button style="background-color: green; color: white" routerLink=".">Register</a>
       </div>
 
     </form>

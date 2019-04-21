@@ -9,20 +9,29 @@
   min-width: 300px;
 }
 
+mat-card-header,
 mat-card-title,
 mat-card-content {
   display: flex;
   justify-content: center;
 }
 
-.error {
+/* .error {
   padding: 16px;
   width: 300px;
   color: white;
   background-color: red;
-}
+} */
 
 .button {
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+span {
+  padding-right: 1rem;
 }

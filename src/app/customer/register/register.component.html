@@ -1,8 +1,45 @@
 <mat-card>
-    <mat-card-title>Register</mat-card-title>
+    <mat-card-header>
+      <mat-card-title>Register</mat-card-title>
+    </mat-card-header>
     <mat-card-content>
-      <form [formGroup]="registrationForm" (ngSubmit)="register()">
-        Value: {{registrationForm.value | json}}
+      <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+        <!-- Value: {{registrationForm.value | json}} -->
+        <!-- <p>
+          <mat-form-field appearance="outline">
+            <mat-label>First Name</mat-label>
+            <input matInput formControlName="firstname">
+            <mat-hint align="end">Create first name</mat-hint>
+            <mat-error *ngIf="firstname.invalid">
+              <mat-error *ngIf="registrationForm.controls['firstname'].errors?.required">Password is required</mat-error>
+            </mat-error>
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field appearance="outline">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="lastname">
+            <mat-hint align="end">Create last name</mat-hint>
+            <mat-error *ngIf="lastname.invalid">
+              <mat-error *ngIf="registrationForm.controls['lastname'].errors?.required">Password is required</mat-error>
+            </mat-error>
+          </mat-form-field>
+        </p> -->
+
+        <!-- <p>
+          <mat-form-field appearance="outline">
+            <mat-label>Birthdate</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="birthDate" disabled>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker disabled="false"></mat-datepicker>
+            <mat-hint align="end">Create birthdate</mat-hint>
+            <mat-error *ngIf="birthdate.invalid">
+              <mat-error *ngIf="registrationForm.controls['birthdate'].errors?.required">Password is required</mat-error>
+            </mat-error>
+          </mat-form-field>
+        </p> -->
+
         <p>
           <mat-form-field appearance="outline">
             <mat-label>Email</mat-label>
@@ -40,9 +77,21 @@
           </mat-form-field>
         </p>
 
+        <p>
+          <mat-checkbox formControlName="agree">
+            I accept terms and conditions
+          </mat-checkbox>
+          <mat-error *ngIf="agree.invalid">
+            You have to agree
+          </mat-error>
+        </p>
+
         <div class="button">
-          <button type="submit" mat-raised-button color="primary" [disabled]="registrationForm.invalid" color="primary">Login</button>
-          <button (click)="loadApiData()" type="button" mat-raised-button color="primary">load api data</button>
+          <button type="submit" mat-raised-button [disabled]="registrationForm.invalid" color="primary" (click)="login()">Login</button>
+          <button type="submit" mat-raised-button color="primary" [disabled]="registrationForm.invalid" color="primary">Register</button>
+          <!-- <button (click)="loadApiData()" type="button" mat-raised-button color="primary">load api data</button> -->
+          <span class="spacer"></span>
+          <a mat-raised-button style="background-color: green; color: white" routerLink=".">Login</a>
         </div>
 
       </form>

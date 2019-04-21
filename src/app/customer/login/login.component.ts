@@ -11,52 +11,30 @@ export class LoginComponent implements OnInit {
 
   constructor(private fb: FormBuilder) { }
 
+  hide = true;
+
   ngOnInit() {
-    this.myForm = this.fb.group({
-      email: ['', [
-        Validators.required,
-        Validators.email
-      ]],
-      password: ['', [
-        Validators.required
-      ]],
-      agree: [false, [
-        Validators.requiredTrue
-      ]]
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]]
     })
 
-    this.myForm.valueChanges.subscribe(console.log)
+    this.loginForm.valueChanges.subscribe(console.log)
   }
 
   get email() {
-    return this.myForm.get('email');
+    return this.loginForm.get('email');
   }
 
   get password() {
-    return this.myForm.get('password');
+    return this.loginForm.get('password');
   }
 
   get agree() {
-    return this.myForm.get('agree')
+    return this.loginForm.get('agree')
   }
 
-  myForm: FormGroup;
-
-  // email = new FormControl('', [Validators.required, Validators.email]);
-
-  // password = new FormControl('', [Validators.required]);
-
-  // getErrorEmail() {
-  //   return this.email.hasError('required') ? 'You must enter a value' :
-  //       this.email.hasError('email') ? 'Not a valid email' :
-  //           '';
-  // }
-
-  // getErrorPassword() {
-  //   return this.password.hasError('required') ? 'You must enter a value' :
-  //       this.password.hasError('password') ? 'Not a valid password' :
-  //           '';
-  // }
+  loginForm: FormGroup;
 
   login() {
 
