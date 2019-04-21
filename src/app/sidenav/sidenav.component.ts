@@ -12,12 +12,12 @@ export class SidenavComponent implements OnInit {
 
   // fillerNav = Array.from({length: 50}, (_, i) => `Nav Item ${i + 1}`);
   fillerNav = [
-    // { name:"home", route:"", icon:"home" },
-    // { name:"contact", route:"contact", icon:"perm_contact_calendar" }
-    { name:"account", route:"account", icon:"perm_contact_calendar" },
-    { name:"wallet", route:"wallet", icon:"perm_contact_calendar" },
-    { name:"walletaccount", route:"walletaccount", icon:"perm_contact_calendar" },
-    { name:"transaction", route:"transaction", icon:"perm_contact_calendar" },
+    { name:"Home", route:"", icon:"home" },
+    { name:"Account", route:"account", icon:"credit_card" },
+    { name:"Wallet", route:"wallet", icon:"account_balance_wallet" },
+    { name:"Wallet Account", route:"walletaccount", icon:"all_inbox" },
+    { name:"Transaction", route:"transaction", icon:"swap_horiz" },
+    { name:"Logout", route:"login", icon:"input" },
   ]
 
   fillerContent = Array.from({length: 50}, () =>

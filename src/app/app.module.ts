@@ -6,17 +6,19 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { FormsModule } from '@angular/forms';
-import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
 import { SidenavComponent } from './sidenav/sidenav.component';
-import { RecordComponent } from './record/record.component';
 import { HttpClientModule } from '@angular/common/http';
+import { LoginComponent } from './customer/login/login.component';
+import { RegisterComponent } from './customer/register/register.component';
+import { ToolbarComponent } from './toolbar/toolbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SidenavComponent,
-    RecordComponent,
+    LoginComponent,
+    RegisterComponent,
+    ToolbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -24,12 +26,6 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     FormsModule,
     MaterialModule,
-    LayoutModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
     HttpClientModule
   ],
   providers: [],
