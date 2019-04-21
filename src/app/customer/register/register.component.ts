@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validator, Validators } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { existEmailValidator } from 'src/app/shared/validator/exist-email';
+import { PasswordValidation } from 'src/app/shared/validator/password-validator';
 
 @Component({
   selector: 'app-register',
@@ -10,20 +12,13 @@ export class RegisterComponent implements OnInit {
 
   constructor(private fb: FormBuilder) { }
 
-  ngOnInit() {
-  }
-
-  // registrationForm = new FormGroup({
-  //   email: new FormControl('Azwan'),
-  //   password: new FormControl(''),
-  //   confirmPassword: new FormControl('')
-  // })
-
   registrationForm = this.fb.group({
-    email: ['Azwan', Validators.required],
+    email: ['Azwan', [Validators.required, Validators.email, existEmailValidator(/^admin$/)]],
     password: ['', [Validators.required, Validators.minLength(8)]],
-    confirmPassword: ['', [Validators.required, Validators.minLength(8)]]
-  })
+    confirmPassword: ['', [Validators.required]]
+  }, {validator: PasswordValidation.MatchPassword});
+
+  ngOnInit() {}
 
   get email() {
     return this.registrationForm.get('email')
