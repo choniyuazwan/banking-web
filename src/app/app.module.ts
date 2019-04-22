@@ -11,6 +11,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './customer/login/login.component';
 import { RegisterComponent } from './customer/register/register.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import { BarLoginComponent } from './bar-login/bar-login.component';
+import { BarRegisterComponent } from './bar-register/bar-register.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     LoginComponent,
     RegisterComponent,
     ToolbarComponent,
+    BarLoginComponent,
+    BarRegisterComponent,
   ],
   imports: [
     BrowserModule,

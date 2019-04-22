@@ -5,17 +5,24 @@ import { RegisterComponent } from './customer/register/register.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { AppComponent } from './app.component';
+import { BarLoginComponent } from './bar-login/bar-login.component';
+import { BarRegisterComponent } from './bar-register/bar-register.component';
 
 const routes: Routes = [
   { path: 'app', component: AppComponent },
-  {
-    path: 'toolbar',
-    component: ToolbarComponent,
-    children: [
-      { path: 'login', component: LoginComponent },
-      { path: 'register', component: RegisterComponent }
-    ]
-  },
+  { path: 'login', component: BarLoginComponent },
+  { path: 'register', component: BarRegisterComponent },
+  { path: 'toolbar', component: ToolbarComponent },
+
+  // {
+  //   path: 'toolbar',
+  //   component: ToolbarComponent,
+  //   children: [
+  //     { path: 'login', component: LoginComponent },
+  //     { path: 'register', component: RegisterComponent }
+  //   ]
+  // },
+
   {
     path: 'sidenav',
     component: SidenavComponent,
