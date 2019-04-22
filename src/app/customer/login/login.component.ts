@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators, FormBuilder, FormGroup} from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 /** @title Simple form field */
 @Component({
@@ -9,21 +10,21 @@ import {FormControl, Validators, FormBuilder, FormGroup} from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router) { }
 
   hide = true;
 
   ngOnInit() {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      username: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]]
     })
 
     this.loginForm.valueChanges.subscribe(console.log)
   }
 
-  get email() {
-    return this.loginForm.get('email');
+  get username() {
+    return this.loginForm.get('username');
   }
 
   get password() {
@@ -37,7 +38,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
   login() {
-
+    this.router.navigate(['/sidenav'])
   }
 }
 

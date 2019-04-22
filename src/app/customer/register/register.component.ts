@@ -22,7 +22,7 @@ export class RegisterComponent implements OnInit {
       firstname: ['', [Validators.required]],
       lastname: ['', [Validators.required]],
       birthdate: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email, existEmailValidator(/^admin$/)]],
+      username: ['', [Validators.required, Validators.email, existEmailValidator(/^admin$/)]],
       password: ['', [Validators.required, Validators.minLength(8)]],
       confirmPassword: ['', [Validators.required]],
       agree: [false, [Validators.requiredTrue]]
@@ -41,8 +41,8 @@ export class RegisterComponent implements OnInit {
     return this.registrationForm.get('birthdate')
   }
 
-  get email() {
-    return this.registrationForm.get('email')
+  get username() {
+    return this.registrationForm.get('username')
   }
 
   get agree() {
@@ -63,7 +63,7 @@ export class RegisterComponent implements OnInit {
 
   loadApiData() {
     this.registrationForm.patchValue({
-      email: 'Choniyu Azwan',
+      username: 'Choniyu Azwan',
       password: 'test',
     })
   }

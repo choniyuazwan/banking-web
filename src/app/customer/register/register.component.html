@@ -43,12 +43,12 @@
         <p>
           <mat-form-field appearance="outline">
             <mat-label>Email</mat-label>
-            <input matInput formControlName="email" required>
+            <input matInput formControlName="username" required>
             <mat-hint align="end">Create email</mat-hint>
-            <mat-error *ngIf="email.invalid">
-                <mat-error *ngIf="registrationForm.controls['email'].errors?.required">Email is required</mat-error>
-                <mat-error *ngIf="registrationForm.controls['email'].errors?.email">Email is not valid</mat-error>
-                <mat-error *ngIf="registrationForm.controls['email'].errors?.existEmail">Email {{registrationForm.controls['email'].errors?.existEmail.value}} already exist</mat-error>
+            <mat-error *ngIf="username.invalid">
+                <mat-error *ngIf="registrationForm.controls['username'].errors?.required">Email is required</mat-error>
+                <mat-error *ngIf="registrationForm.controls['username'].errors?.email">Email is not valid</mat-error>
+                <mat-error *ngIf="registrationForm.controls['username'].errors?.existEmail">Email {{registrationForm.controls['username'].errors?.existEmail.value}} already exist</mat-error>
             </mat-error>
           </mat-form-field>
         </p>

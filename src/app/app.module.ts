@@ -13,6 +13,8 @@ import { RegisterComponent } from './customer/register/register.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { BarLoginComponent } from './bar-login/bar-login.component';
 import { BarRegisterComponent } from './bar-register/bar-register.component';
+import { AccountListComponent } from './account/account-list/account-list.component';
+import { AccountAddComponent } from './account/account-add/account-add.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { BarRegisterComponent } from './bar-register/bar-register.component';
     ToolbarComponent,
     BarLoginComponent,
     BarRegisterComponent,
+    AccountListComponent,
+    AccountAddComponent,
   ],
   imports: [
     BrowserModule,
