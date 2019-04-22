@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { existEmailValidator } from 'src/app/shared/validator/exist-email';
 import { PasswordValidation } from 'src/app/shared/validator/password-validator';
-import { RegistrationService } from 'src/app/service/registration.service';
+import { RegistrationService } from 'src/app/shared/service/registration.service';
 
 @Component({
   selector: 'app-register',
@@ -13,11 +13,15 @@ export class RegisterComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private _registrationService: RegistrationService) { }
   registrationForm: FormGroup;
+
+  hide = true;
+  hide2 = true;
+
   ngOnInit() {
     this.registrationForm = this.fb.group({
-      // firstname: ['', [Validators.required]],
-      // lastname: ['', [Validators.required]],
-      // birthdate: ['', [Validators.required]],
+      firstname: ['', [Validators.required]],
+      lastname: ['', [Validators.required]],
+      birthdate: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email, existEmailValidator(/^admin$/)]],
       password: ['', [Validators.required, Validators.minLength(8)]],
       confirmPassword: ['', [Validators.required]],
