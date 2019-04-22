@@ -13,13 +13,15 @@
         <!-- <a mat-list-item routerLink="." *ngFor="let nav of fillerNav">{{nav}}</a> -->
         <a mat-list-item [routerLink]="nav.route" *ngFor="let nav of fillerNav">
           <mat-icon class="icon">{{nav.icon}}</mat-icon>
-          {{nav.name}}</a>
+          {{nav.name}}
+        </a>
       </mat-nav-list>
     </mat-sidenav>
 
     <mat-sidenav-content>
       <!-- <p *ngFor="let content of fillerContent">{{content}}</p> -->
-      <button mat-raised-button>button</button>
+      <!-- <button mat-raised-button>button</button> -->
+      <!-- <ng-content></ng-content> -->
       <router-outlet></router-outlet>
     </mat-sidenav-content>
   </mat-sidenav-container>

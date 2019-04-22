@@ -12,8 +12,8 @@ export class CustomerService {
 
   constructor(private httpClient: HttpClient) { }
 
-  login(username, password) : Observable<CommonResponse<Customer>> {
-    let url = 'http://localhost:8080/customer/${username}/${password}';
-    return this.httpClient.get<CommonResponse<Customer>>(url);
+  login(loginData: Login) : Observable<CommonResponse<Customer>> {
+    let url = `http://localhost:8080/customer/login`;
+    return this.httpClient.post<CommonResponse<Customer>>(url, loginData);
   }
 }

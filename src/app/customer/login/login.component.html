@@ -14,7 +14,7 @@
           <mat-hint align="end">Input your email</mat-hint>
           <mat-error *ngIf="username.invalid">
               <mat-error *ngIf="loginForm.controls['username'].errors?.required">Email is required</mat-error>
-              <mat-error *ngIf="loginForm.controls['username'].errors?.email">Email is not valid</mat-error>
+              <!-- <mat-error *ngIf="loginForm.controls['username'].errors?.email">Email is not valid</mat-error> -->
           </mat-error>
         </mat-form-field>
       </p>
@@ -34,7 +34,7 @@
       <div class="button">
         <button type="submit" mat-raised-button [disabled]="loginForm.invalid" color="primary">Login</button>
         <span class="spacer"></span>
-        <a mat-raised-button style="background-color: green; color: white" routerLink="/register">Register</a>
+        <a routerLink="/register">Register here</a>
       </div>
 
     </form>

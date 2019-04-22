@@ -3,15 +3,15 @@
       <mat-card-title>Register</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
-        <!-- Value: {{registrationForm.value | json}} -->
+      <form [formGroup]="registerForm" (ngSubmit)="register()">
+        <!-- Value: {{registerForm.value | json}} -->
         <p>
           <mat-form-field appearance="outline">
             <mat-label>First Name</mat-label>
             <input matInput formControlName="firstname" required>
             <mat-hint align="end">Create first name</mat-hint>
             <mat-error *ngIf="firstname.invalid">
-              <mat-error *ngIf="registrationForm.controls['firstname'].errors?.required">Password is required</mat-error>
+              <mat-error *ngIf="registerForm.controls['firstname'].errors?.required">Password is required</mat-error>
             </mat-error>
           </mat-form-field>
         </p>
@@ -22,7 +22,7 @@
             <input matInput formControlName="lastname" required>
             <mat-hint align="end">Create last name</mat-hint>
             <mat-error *ngIf="lastname.invalid">
-              <mat-error *ngIf="registrationForm.controls['lastname'].errors?.required">Password is required</mat-error>
+              <mat-error *ngIf="registerForm.controls['lastname'].errors?.required">Password is required</mat-error>
             </mat-error>
           </mat-form-field>
         </p>
@@ -35,7 +35,7 @@
             <mat-datepicker #picker disabled="false"></mat-datepicker>
             <mat-hint align="end">Create birthdate</mat-hint>
             <mat-error *ngIf="birthdate.invalid">
-              <mat-error *ngIf="registrationForm.controls['birthdate'].errors?.required">Password is required</mat-error>
+              <mat-error *ngIf="registerForm.controls['birthdate'].errors?.required">Password is required</mat-error>
             </mat-error>
           </mat-form-field>
         </p>
@@ -46,9 +46,9 @@
             <input matInput formControlName="username" required>
             <mat-hint align="end">Create email</mat-hint>
             <mat-error *ngIf="username.invalid">
-                <mat-error *ngIf="registrationForm.controls['username'].errors?.required">Email is required</mat-error>
-                <mat-error *ngIf="registrationForm.controls['username'].errors?.email">Email is not valid</mat-error>
-                <mat-error *ngIf="registrationForm.controls['username'].errors?.existEmail">Email {{registrationForm.controls['username'].errors?.existEmail.value}} already exist</mat-error>
+                <mat-error *ngIf="registerForm.controls['username'].errors?.required">Email is required</mat-error>
+                <mat-error *ngIf="registerForm.controls['username'].errors?.email">Email is not valid</mat-error>
+                <mat-error *ngIf="registerForm.controls['username'].errors?.existEmail">Email {{registerForm.controls['username'].errors?.existEmail.value}} already exist</mat-error>
             </mat-error>
           </mat-form-field>
         </p>
@@ -60,8 +60,8 @@
             <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             <mat-hint align="end">Create password</mat-hint>
             <mat-error *ngIf="password.invalid">
-              <mat-error *ngIf="registrationForm.controls['password'].errors?.required">Password is required</mat-error>
-              <mat-error *ngIf="registrationForm.controls['password'].errors?.minlength">Password must be at least 8 characters</mat-error>
+              <mat-error *ngIf="registerForm.controls['password'].errors?.required">Password is required</mat-error>
+              <mat-error *ngIf="registerForm.controls['password'].errors?.minlength">Password must be at least 8 characters</mat-error>
             </mat-error>
           </mat-form-field>
         </p>
@@ -72,9 +72,9 @@
             <input [type]="hide2 ? 'password' : 'text'" matInput formControlName="confirmPassword">
             <mat-icon matSuffix (click)="hide2 = !hide2">{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
             <mat-hint align="end">Input password again</mat-hint>
-            <mat-error *ngIf="registrationForm.controls['confirmPassword'].errors?.required || registrationForm.controls['confirmPassword'].errors?.mismatch">
-              <mat-error *ngIf="registrationForm.controls['confirmPassword'].errors?.required">Confirm password is required</mat-error>
-              <mat-error *ngIf="registrationForm.controls['confirmPassword'].errors?.mismatch">Password do not match</mat-error>
+            <mat-error *ngIf="registerForm.controls['confirmPassword'].errors?.required || registerForm.controls['confirmPassword'].errors?.mismatch">
+              <mat-error *ngIf="registerForm.controls['confirmPassword'].errors?.required">Confirm password is required</mat-error>
+              <mat-error *ngIf="registerForm.controls['confirmPassword'].errors?.mismatch">Password do not match</mat-error>
             </mat-error>
           </mat-form-field>
         </p>
@@ -89,10 +89,9 @@
         </p>
 
         <div class="button">
-          <button type="submit" mat-raised-button color="primary" [disabled]="registrationForm.invalid" color="primary">Register</button>
-          <!-- <button (click)="loadApiData()" type="button" mat-raised-button color="primary">load api data</button> -->
+          <button type="submit" mat-raised-button color="primary" [disabled]="registerForm.invalid" color="primary">Register</button>
           <span class="spacer"></span>
-          <a mat-raised-button style="background-color: green; color: white" routerLink="/login">Login</a>
+          <a routerLink="/login">Login here</a>
         </div>
 
       </form>

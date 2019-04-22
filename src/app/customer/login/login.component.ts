@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators, FormBuilder, FormGroup} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Customer } from 'src/app/shared/model/customer';
+import { CustomerService } from 'src/app/shared/service/customer.service';
+import { Login } from 'src/app/shared/model/login';
 
 /** @title Simple form field */
 @Component({
@@ -10,18 +13,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router) { }
-
-  hide = true;
-
-  ngOnInit() {
-    this.loginForm = this.fb.group({
-      username: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]]
-    })
-
-    this.loginForm.valueChanges.subscribe(console.log)
-  }
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private customerService: CustomerService) { }
 
   get username() {
     return this.loginForm.get('username');
@@ -30,15 +22,42 @@ export class LoginComponent implements OnInit {
   get password() {
     return this.loginForm.get('password');
   }
+  message;
 
-  get agree() {
-    return this.loginForm.get('agree')
-  }
+  hide = true;
+
+  customer: Customer;
 
   loginForm: FormGroup;
 
+  ngOnInit() {
+    if (sessionStorage.getItem('cif')) {
+      this.message = `${sessionStorage.getItem('cif')} sudah login`;
+    } else {
+      this.message = `silahkan login`;
+    }
+
+    this.loginForm = this.fb.group({
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required]]
+    });
+
+    // this.loginForm.valueChanges.subscribe(console.log)
+  }
+
   login() {
-    this.router.navigate(['/sidenav'])
+    this.customerService.login(new Login(this.loginForm.get('username').value, this.loginForm.get('password').value)).subscribe(
+      response => {
+        if (response.responseCode !== '01') {
+          alert(response.responseMessage);
+        } else {
+          this.customer = response.data;
+          this.message = `username & password berhasil login`;
+          localStorage.setItem('cif', response.data.cif)
+          this.router.navigate(['/sidenav'])
+        }
+      }
+    );
   }
 }
 

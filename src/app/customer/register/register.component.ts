@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { existEmailValidator } from 'src/app/shared/validator/exist-email';
 import { PasswordValidation } from 'src/app/shared/validator/password-validator';
-import { RegistrationService } from 'src/app/shared/service/registration.service';
 
 @Component({
   selector: 'app-register',
@@ -11,14 +10,14 @@ import { RegistrationService } from 'src/app/shared/service/registration.service
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private _registrationService: RegistrationService) { }
-  registrationForm: FormGroup;
+  constructor(private fb: FormBuilder) { }
+  registerForm: FormGroup;
 
   hide = true;
   hide2 = true;
 
   ngOnInit() {
-    this.registrationForm = this.fb.group({
+    this.registerForm = this.fb.group({
       firstname: ['', [Validators.required]],
       lastname: ['', [Validators.required]],
       birthdate: ['', [Validators.required]],
@@ -30,50 +29,34 @@ export class RegisterComponent implements OnInit {
   }
 
   get firstname() {
-    return this.registrationForm.get('firstname')
+    return this.registerForm.get('firstname')
   }
 
   get lastname() {
-    return this.registrationForm.get('lastname')
+    return this.registerForm.get('lastname')
   }
 
   get birthdate() {
-    return this.registrationForm.get('birthdate')
+    return this.registerForm.get('birthdate')
   }
 
   get username() {
-    return this.registrationForm.get('username')
+    return this.registerForm.get('username')
   }
 
   get agree() {
-    return this.registrationForm.get('agree')
+    return this.registerForm.get('agree')
   }
 
   get password() {
-    return this.registrationForm.get('password')
+    return this.registerForm.get('password')
   }
 
   get confirmPassword() {
-    return this.registrationForm.get('confirmPassword')
+    return this.registerForm.get('confirmPassword')
   }
 
   register() {
-
-  }
-
-  loadApiData() {
-    this.registrationForm.patchValue({
-      username: 'Choniyu Azwan',
-      password: 'test',
-    })
-  }
-
-  onSubmit() {
-    console.log(this.registrationForm.value)
-    this._registrationService.register(this.registrationForm.value)
-      .subscribe(
-        response => console.log('success', response),
-        error => console.log('error', error)
-      );
+    const username = this.registerForm
   }
 }
