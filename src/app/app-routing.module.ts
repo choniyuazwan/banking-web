@@ -26,6 +26,9 @@ const routes: Routes = [
       { path: 'walletaccountlist', component: WalletaccountListComponent },
       { path: 'transactionlist', component: TransactionListComponent },
       { path: 'profile', component: ProfileDetailComponent },
+
+      { path: 'walletlist', component: WalletListComponent },
+
     ]
   },
 ];

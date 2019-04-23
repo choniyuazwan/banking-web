@@ -1,7 +1,7 @@
 export class Customer {
   cif:string
-  firstName:string
-  lastName:string
+  firstname:string
+  lastname:string
   birthdate:string
   username:string
   password:string

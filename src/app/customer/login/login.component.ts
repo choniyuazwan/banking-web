@@ -5,6 +5,7 @@ import { Customer } from 'src/app/shared/model/customer';
 import { CustomerService } from 'src/app/shared/service/customer.service';
 import { Login } from 'src/app/shared/model/login';
 
+
 /** @title Simple form field */
 @Component({
   selector: 'app-login',
@@ -52,7 +53,6 @@ export class LoginComponent implements OnInit {
           alert(response.responseMessage);
         } else {
           this.customer = response.data;
-          this.message = `username & password berhasil login`;
           localStorage.setItem('cif', response.data.cif)
           this.router.navigate(['/sidenav'])
         }

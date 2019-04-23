@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { existEmailValidator } from 'src/app/shared/validator/exist-email';
 import { PasswordValidation } from 'src/app/shared/validator/password-validator';
+import { CustomerService } from 'src/app/shared/service/customer.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Customer } from 'src/app/shared/model/customer';
 
 @Component({
   selector: 'app-register',
@@ -10,7 +13,7 @@ import { PasswordValidation } from 'src/app/shared/validator/password-validator'
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,  private route: ActivatedRoute, private router: Router, private customerService: CustomerService) { }
   registerForm: FormGroup;
 
   hide = true;
@@ -57,6 +60,21 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    const username = this.registerForm
+    let customer = new Customer();
+    customer.firstname = this.registerForm.controls['firstname'].value;
+    customer.lastname = this.registerForm.controls['lastname'].value;
+    customer.birthdate = this.registerForm.controls['birthdate'].value;
+    customer.username = this.registerForm.controls['username'].value;
+    customer.password = this.registerForm.controls['password'].value;
+
+    this.customerService.register(customer).subscribe(
+      response => {
+        if(response.responseCode!=='01'){
+          alert(response.responseMessage);
+        }else{
+          this.router.navigate(['/login'])
+        }
+      }
+    )
   }
 }

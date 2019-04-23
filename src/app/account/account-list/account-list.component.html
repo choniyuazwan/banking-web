@@ -1,3 +1,20 @@
 <p>
   account-list works!
 </p>
+
+  <button mat-raised-button (click)="add()">add</button>
+
+<table>
+  <tr>
+    <td>Account Number</td>
+    <td>Account Name</td>
+    <td>Balance</td>
+    <td>Open Date</td>
+  </tr>
+  <tr *ngFor="let account of accounts">
+    <td>{{account.accountNumber}}</td>
+    <td>{{account.accountName}}</td>
+    <td>{{account.balance}}</td>
+    <td>{{account.openDate}}</td>
+  </tr>
+</table>

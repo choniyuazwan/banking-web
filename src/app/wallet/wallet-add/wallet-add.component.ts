@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, VERSION, ViewChild } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { DiscardComponent } from '../../discard/discard.component';
 
 @Component({
   selector: 'app-wallet-add',
@@ -7,9 +11,39 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WalletAddComponent implements OnInit {
 
-  constructor() { }
+  public breakpoint: number; // Breakpoint observer code
+  public addCusForm: FormGroup;
 
-  ngOnInit() {
+  constructor(
+    private fb: FormBuilder,
+    public dialog: MatDialog
+  ) { }
+
+  public ngOnInit(): void {
+    this.addCusForm = this.fb.group({
+      IdProof: null,
+       firstname: [null, [Validators.required, Validators.pattern('[a-zA-Z]+([a-zA-Z ]+)*')]],
+      email: [null, [Validators.required, Validators.email]],
+
+        address: [null ],
+
+    });
+    this.breakpoint = window.innerWidth <= 600 ? 1 : 2; // Breakpoint observer code
   }
 
+  openDialog(): void {
+    console.log("this.addCusForm",this.addCusForm.dirty);
+    if(this.addCusForm.touched) {
+      const dialogRef = this.dialog.open(DiscardComponent, {
+        width: '340px',
+      });
+    } else {
+      this.dialog.closeAll();
+    }
+  }
+
+  // tslint:disable-next-line:no-any
+  public onResize(event: any): void {
+    this.breakpoint = event.target.innerWidth <= 600 ? 1 : 2;
+  }
 }

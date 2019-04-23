@@ -16,4 +16,9 @@ export class CustomerService {
     let url = `http://localhost:8080/customer/login`;
     return this.httpClient.post<CommonResponse<Customer>>(url, loginData);
   }
+
+  register(registerData: Customer) : Observable<CommonResponse<Customer>> {
+    let url = `http://localhost:8080/customer`;
+    return this.httpClient.post<CommonResponse<Customer>>(url, registerData);
+  }
 }
