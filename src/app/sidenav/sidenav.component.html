@@ -1,7 +1,7 @@
 <div class="example-container" [class.example-is-mobile]="mobileQuery.matches" *ngIf="shouldRun">
   <mat-toolbar color="primary" class="example-toolbar">
     <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
-    <h1 class="example-app-name">Paw Ang Ular</h1>
+    <h1 class="example-app-name">Banking</h1>
   </mat-toolbar>
 
   <mat-sidenav-container class="example-sidenav-container"
@@ -15,6 +15,11 @@
           <mat-icon class="icon">{{nav.icon}}</mat-icon>
           {{nav.name}}
         </a>
+        <!-- <a mat-list-item [routerLink]="/login">
+          <mat-icon class="icon">input</mat-icon>
+          Logout
+        </a> -->
+        <!-- { name:"Logout", route:"/login", icon:"input" }, -->
       </mat-nav-list>
     </mat-sidenav>
 

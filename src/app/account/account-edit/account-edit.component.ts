@@ -27,13 +27,23 @@ export class AccountEditComponent implements OnInit {
 
   public breakpoint: number; // Breakpoint observer code
   public addCusForm: FormGroup;
+  public account: Account = new Account();
 
   ngOnInit() {
-    console.log('edit account')
-    console.log(this.data)
+
+    this.accountService.getAccount(this.data.accountNumber).subscribe(
+      response => {
+        if(response.responseCode!=='01'){
+          alert(JSON.stringify(response));
+        }else{
+          this.account = response.data;
+          this.accountName.setValue(this.account.accountName);
+        }
+      }
+    )
+
     this.addCusForm = this.fb.group({
-      accountName: ['kdjsakljflsajd', [Validators.required]],
-      balance: ['', [Validators.required]],
+      accountName: ['', [Validators.required]],
     });
     this.breakpoint = window.innerWidth <= 600 ? 1 : 2; // Breakpoint observer code
   }
@@ -71,10 +81,6 @@ export class AccountEditComponent implements OnInit {
     return this.addCusForm.get('accountName')
   }
 
-  get balance() {
-    return this.addCusForm.get('balance')
-  }
-
   public cancelN(): void {
     this.dialog.closeAll();
   }
@@ -82,13 +88,8 @@ export class AccountEditComponent implements OnInit {
   customer: Customer = new Customer;
 
   edit() {
-    let account = new Account();
-    account.accountName = this.addCusForm.controls['accountName'].value;
-    account.balance = this.addCusForm.controls['balance'].value;
-    this.customer.cif = localStorage.getItem('cif');
-    account.customer = this.customer;
-
-    this.accountService.addAccount(account).subscribe(
+    this.account.accountName = this.addCusForm.controls['accountName'].value;
+    this.accountService.editAccount(this.account).subscribe(
       response => {
         if(response.responseCode!=='01'){
           console.log(response);

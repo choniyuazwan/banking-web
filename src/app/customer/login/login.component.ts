@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
   ngOnInit() {
+    localStorage.removeItem('cif')
     if (sessionStorage.getItem('cif')) {
       this.message = `${sessionStorage.getItem('cif')} sudah login`;
     } else {

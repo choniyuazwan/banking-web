@@ -61,9 +61,22 @@
       <td mat-cell *matCellDef="let row"> {{row.openDate}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="action">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
-      <td mat-cell *matCellDef="let row"> <button color="primary" mat-button (click)="edit(dataSource.data.indexOf(row))">{{dataSource.data.indexOf(row)}}</button> </td>
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Edit </th>
+      <td mat-cell *matCellDef="let row">
+        <button mat-icon-button color="accent" (click)="edit(dataSource.data.indexOf(row))">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Delete </th>
+      <td mat-cell *matCellDef="let row">
+        <button mat-icon-button color="warn" (click)="delete(dataSource.data.indexOf(row))">
+            <mat-icon>delete</mat-icon>
+        </button>
+      </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

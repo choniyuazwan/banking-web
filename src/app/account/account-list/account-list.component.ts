@@ -13,7 +13,7 @@ import { AccountEditComponent } from '../account-edit/account-edit.component';
 })
 export class AccountListComponent implements OnInit {
 
-  displayedColumns: string[] = ['accountNumber', 'accountName', 'balance', 'openDate', 'action'];
+  displayedColumns: string[] = ['accountNumber', 'accountName', 'balance', 'openDate', 'edit', 'delete'];
   dataSource: MatTableDataSource<Account>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -60,15 +60,23 @@ export class AccountListComponent implements OnInit {
     const dialogRef = this.dialog.open(AccountEditComponent,{
       width: '640px', disableClose: true ,
       data: {
-        cif : this.accounts[index].accountNumber
+        accountNumber : this.accounts[index].accountNumber
       }
     });
-    // dialogRef.componentInstance = index;
   }
-  // edit(index) {
-  //   alert(this.accounts[index].accountNumber)
-  // }
 
-
+  delete(index) {
+    // this.account.accountName = this.addCusForm.controls['accountName'].value;
+    this.accountService.deleteAccount(this.accounts[index].accountNumber).subscribe(
+      response => {
+        if(response.responseCode!=='01'){
+          console.log(response);
+        }else{
+          console.log(response);
+          window.location.reload();
+        }
+      }
+    )
+  }
 }
 

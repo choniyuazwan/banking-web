@@ -17,8 +17,23 @@ export class AccountService {
     return this.httpClient.get<CommonResponse<Account>>(url);
   }
 
-  addAccount(accountData: Account) : Observable<CommonResponse<Customer>> {
+  addAccount(accountData: Account): Observable<CommonResponse<Customer>> {
     let url = `http://localhost:8080/account/`;
     return this.httpClient.post<CommonResponse<Customer>>(url, accountData);
+  }
+
+  getAccount(accountNumber) {
+    let url = `http://localhost:8080/account/${accountNumber}`;
+    return this.httpClient.get<CommonResponse<Account>>(url);
+  }
+
+  editAccount(accountData: Account) {
+    let url = `http://localhost:8080/account/`;
+    return this.httpClient.patch<CommonResponse<Customer>>(url, accountData);
+  }
+
+  deleteAccount(accountNumber) {
+    let url = `http://localhost:8080/account/${accountNumber}`;
+    return this.httpClient.delete<CommonResponse<Customer>>(url);
   }
 }
