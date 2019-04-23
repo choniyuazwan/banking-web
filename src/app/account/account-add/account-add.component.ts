@@ -1,10 +1,11 @@
-import { Component, OnInit, VERSION, ViewChild } from '@angular/core';
+import { Component, OnInit, VERSION, ViewChild, HostListener } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DiscardComponent } from '../../discard/discard.component';
 import { Account } from 'src/app/shared/model/account';
 import { AccountService } from 'src/app/shared/service/account.service';
+import { Customer } from 'src/app/shared/model/customer';
 
 @Component({
   selector: 'app-account-add',
@@ -67,19 +68,23 @@ export class AccountAddComponent implements OnInit {
     this.dialog.closeAll();
   }
 
+  customer: Customer = new Customer;
+
   add() {
     let account = new Account();
     account.accountName = this.addCusForm.controls['accountName'].value;
     account.balance = this.addCusForm.controls['balance'].value;
-    account.customer.cif = localStorage.getItem('cif');
+    this.customer.cif = localStorage.getItem('cif');
+    account.customer = this.customer;
 
     this.accountService.addAccount(account).subscribe(
       response => {
         if(response.responseCode!=='01'){
           console.log(response);
         }else{
-          // this.router.navigate(['/login'])
+          // this.router.navigate(['/sidenav/accountlist'])
           console.log(response);
+          window.location.reload();
         }
       }
     )
