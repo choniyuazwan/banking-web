@@ -25,6 +25,8 @@ import { TransactionWithdrawComponent } from './transaction/transaction-withdraw
 import { TransactionTransferComponent } from './transaction/transaction-transfer/transaction-transfer.component';
 import { ProfileDetailComponent } from './profile/profile-detail/profile-detail.component';
 import { DiscardComponent } from './discard/discard.component';
+import { AccountEditComponent } from './account/account-edit/account-edit.component';
+import { WalletEditComponent } from './wallet/wallet-edit/wallet-edit.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +49,8 @@ import { DiscardComponent } from './discard/discard.component';
     TransactionTransferComponent,
     ProfileDetailComponent,
     DiscardComponent,
+    AccountEditComponent,
+    WalletEditComponent,
   ],
   // exports: [AccountAddComponent, DiscardComponent],
   entryComponents: [

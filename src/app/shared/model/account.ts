@@ -1,7 +1,9 @@
+import { Customer } from './customer';
+
 export class Account {
   accountNumber;
   accountName;
   balance;
   openDate;
-  customer: { [x: string]: string; }[];
+  customer: Customer;
 }

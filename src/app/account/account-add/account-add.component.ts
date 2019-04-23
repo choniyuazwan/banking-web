@@ -71,7 +71,7 @@ export class AccountAddComponent implements OnInit {
     let account = new Account();
     account.accountName = this.addCusForm.controls['accountName'].value;
     account.balance = this.addCusForm.controls['balance'].value;
-    account.customer['cif'] = localStorage.getItem('cif');
+    account.customer.cif = localStorage.getItem('cif');
 
     this.accountService.addAccount(account).subscribe(
       response => {

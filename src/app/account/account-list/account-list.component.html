@@ -1,4 +1,4 @@
-<p>
+<!-- <p>
   account-list works!
 </p>
 
@@ -17,4 +17,44 @@
     <td>{{account.balance}}</td>
     <td>{{account.openDate}}</td>
   </tr>
-</table>
+</table> -->
+
+<mat-form-field>
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort>
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Account Name </th>
+      <td mat-cell *matCellDef="let row"> {{row.accountName}} </td>
+    </ng-container>
+
+    <!-- Progress Column -->
+    <ng-container matColumnDef="progress">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Balance </th>
+      <td mat-cell *matCellDef="let row"> {{row.balance}}% </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Open Date </th>
+      <td mat-cell *matCellDef="let row"> {{row.openDate}} </td>
+    </ng-container>
+
+    Color Column
+    <ng-container matColumnDef="color">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Color </th>
+      <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.color}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+    </tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>
+
