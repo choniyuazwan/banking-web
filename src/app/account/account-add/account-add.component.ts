@@ -1,4 +1,4 @@
-import { Component, OnInit, VERSION, ViewChild, HostListener } from '@angular/core';
+import { Component, OnInit, VERSION, ViewChild, HostListener, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -14,12 +14,19 @@ import { Customer } from 'src/app/shared/model/customer';
 })
 export class AccountAddComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, public dialog: MatDialog,  private route: ActivatedRoute, private router: Router, private accountService: AccountService) { }
+  constructor(
+    private fb: FormBuilder,
+    public dialog: MatDialog,
+    private route: ActivatedRoute,
+    private router: Router,
+    private accountService: AccountService
+  ) { }
 
   public breakpoint: number; // Breakpoint observer code
   public addCusForm: FormGroup;
 
   ngOnInit() {
+    console.log('add account')
     this.addCusForm = this.fb.group({
       accountName: ['', [Validators.required]],
       balance: ['', [Validators.required]],

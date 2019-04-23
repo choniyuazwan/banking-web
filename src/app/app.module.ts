@@ -60,7 +60,8 @@ import { WalletEditComponent } from './wallet/wallet-edit/wallet-edit.component'
     WalletAddComponent,
     TransactionTopupComponent,
     TransactionTransferComponent,
-    TransactionWithdrawComponent
+    TransactionWithdrawComponent,
+    AccountEditComponent
   ],
   imports: [
     BrowserModule,

@@ -3,6 +3,7 @@ import { AccountService } from 'src/app/shared/service/account.service';
 import { MatDialog, MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import { AccountAddComponent } from '../account-add/account-add.component';
 import { Account } from 'src/app/shared/model/account';
+import { AccountEditComponent } from '../account-edit/account-edit.component';
 
 
 @Component({
@@ -56,7 +57,18 @@ export class AccountListComponent implements OnInit {
   }
 
   edit(index) {
-
+    const dialogRef = this.dialog.open(AccountEditComponent,{
+      width: '640px', disableClose: true ,
+      data: {
+        cif : this.accounts[index].accountNumber
+      }
+    });
+    // dialogRef.componentInstance = index;
   }
+  // edit(index) {
+  //   alert(this.accounts[index].accountNumber)
+  // }
+
+
 }
 
