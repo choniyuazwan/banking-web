@@ -33,8 +33,8 @@ export class AccountListComponent implements OnInit {
           this.accounts = response.data;
         }
 
-        let arrayAccount = Object.keys(this.accounts).map(i => this.accounts[i])
-        this.dataSource = new MatTableDataSource(arrayAccount);
+        let arrayAccounts = Object.keys(this.accounts).map(i => this.accounts[i])
+        this.dataSource = new MatTableDataSource(arrayAccounts);
 
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;

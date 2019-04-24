@@ -1,4 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material';
+import { ActivatedRoute, Router } from '@angular/router';
+import { TransactionService } from 'src/app/shared/service/transaction.service';
+import { DiscardComponent } from 'src/app/discard/discard.component';
+import { Transaction } from 'src/app/shared/model/transaction';
+import { Customer } from 'src/app/shared/model/customer';
+import { TransactionType } from 'src/app/shared/model/transaction-type';
+import { Account } from 'src/app/shared/model/account';
+import { Wallet } from 'src/app/shared/model/wallet';
+import { WalletService } from 'src/app/shared/service/wallet.service';
+import { WalletAccountService } from 'src/app/shared/service/wallet-account.service';
+import { WalletAccount } from 'src/app/shared/model/wallet-account';
 
 @Component({
   selector: 'app-transaction-topup',
@@ -7,9 +20,118 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TransactionTopupComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private fb: FormBuilder,
+    public dialog: MatDialog,
+    private route: ActivatedRoute,
+    private router: Router,
+    private transactionService: TransactionService,
+    private walletAccountService: WalletAccountService
+  ) { }
+
+  // private markAsDirty(group: FormGroup): void {
+  //   group.markAsDirty();
+  //   // tslint:disable-next-line:forin
+  //   for (const i in group.controls) {
+  //     group.controls[i].markAsDirty();
+  //   }
+  // }
+
+  get amount() {
+    return this.addCusForm.get('transactionName')
+  }
+
+  get walletId() {
+    return this.addCusForm.get('walletId')
+  }
+
+  get accountDebitNumber() {
+    return this.addCusForm.get('accountDebitNumber')
+  }
+
+  public breakpoint: number; // Breakpoint observer code
+  public addCusForm: FormGroup;
+
+  customer: Customer = new Customer;
+  transactionType: TransactionType = new TransactionType;
+  accountDebit: Account = new Account;
+  wallet: Wallet = new Wallet;
+  walletAccounts: WalletAccount
+  arrayWalletAccounts;
 
   ngOnInit() {
+
+    this.walletAccountService.getWalletAccounts(localStorage.getItem('cif')).subscribe(
+      response => {
+        if (response.responseCode !== '01') {
+          alert(response.responseMessage);
+        } else {
+          // alert(JSON.stringify(response.data))
+          this.walletAccounts = response.data;
+        }
+
+        this.arrayWalletAccounts = Object.keys(this.walletAccounts).map(i => this.walletAccounts[i])
+        console.log(JSON.stringify(this.arrayWalletAccounts))
+      }
+    );
+
+
+    console.log('add transaction')
+    this.addCusForm = this.fb.group({
+      walletId: ['', [Validators.required]],
+      accountDebitNumber: ['', [Validators.required]],
+      amount: ['', [Validators.required]]
+    });
+    this.breakpoint = window.innerWidth <= 600 ? 1 : 2; // Breakpoint observer code
+  }
+
+  public onAddCus(): void {
+    this.add();
+    this.cancelN()
+    // this.markAsDirty(this.addCusForm);
+  }
+
+  openDialog(): void {
+    if(this.addCusForm.touched) {
+      const dialogRef = this.dialog.open(DiscardComponent, {
+        width: '340px',
+      });
+    } else {
+      this.dialog.closeAll();
+    }
+  }
+
+  // tslint:disable-next-line:no-any
+  public onResize(event: any): void {
+    this.breakpoint = event.target.innerWidth <= 600 ? 1 : 2;
+  }
+
+  public cancelN(): void {
+    this.dialog.closeAll();
+  }
+
+  add() {
+    let transaction = new Transaction();
+    this.customer.cif = localStorage.getItem('cif');
+    this.transactionType.code = 1
+    this.wallet.id = this.addCusForm.controls['walletId'];
+    this.accountDebit.accountNumber = this.addCusForm.controls['accountDebitNumber'];
+
+    transaction.type = this.transactionType;
+    transaction.accountDebit = this.accountDebit;
+    transaction.customer = this.customer;
+
+    this.transactionService.addTransaction(transaction).subscribe(
+      response => {
+        if(response.responseCode!=='01'){
+          console.log(response);
+        }else{
+          // this.router.navigate(['/sidenav/transactionlist'])
+          console.log(response);
+          window.location.reload();
+        }
+      }
+    )
   }
 
 }

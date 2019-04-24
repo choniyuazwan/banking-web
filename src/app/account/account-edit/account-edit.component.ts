@@ -23,8 +23,6 @@ export class AccountEditComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { console.log(this.data) }
 
-  myProp;
-
   public breakpoint: number; // Breakpoint observer code
   public addCusForm: FormGroup;
   public account: Account = new Account();
