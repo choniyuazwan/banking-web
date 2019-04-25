@@ -16,23 +16,13 @@ export class WalletAccountService {
     return this.httpClient.get<CommonResponse<WalletAccount>>(url);
   }
 
-  // addWalletAccount(walletAccountData: WalletAccount): Observable<CommonResponse<WalletAccount>> {
-  //   let url = `http://localhost:8080/walletaccount/`;
-  //   return this.httpClient.post<CommonResponse<WalletAccount>>(url, walletAccountData);
-  // }
+  addWalletAccount(walletAccountData: WalletAccount): Observable<CommonResponse<WalletAccount>> {
+    let url = `http://localhost:8080/walletaccount/`;
+    return this.httpClient.post<CommonResponse<WalletAccount>>(url, walletAccountData);
+  }
 
-  // getWalletAccount(walletaccountNumber) {
-  //   let url = `http://localhost:8080/walletaccount/${walletaccountNumber}`;
-  //   return this.httpClient.get<CommonResponse<WalletAccount>>(url);
-  // }
-
-  // editWalletAccount(walletAccountData: WalletAccount) {
-  //   let url = `http://localhost:8080/walletaccount/`;
-  //   return this.httpClient.patch<CommonResponse<WalletAccount>>(url, walletAccountData);
-  // }
-
-  // deleteWalletAccount(walletaccountNumber) {
-  //   let url = `http://localhost:8080/walletaccount/${walletaccountNumber}`;
-  //   return this.httpClient.delete<CommonResponse<WalletAccount>>(url);
-  // }
+  deleteWalletAccount(id) {
+    let url = `http://localhost:8080/walletaccount/${id}`;
+    return this.httpClient.delete<CommonResponse<WalletAccount>>(url);
+  }
 }

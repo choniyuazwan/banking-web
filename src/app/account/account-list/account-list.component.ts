@@ -66,7 +66,6 @@ export class AccountListComponent implements OnInit {
   }
 
   delete(index) {
-    // this.account.accountName = this.addCusForm.controls['accountName'].value;
     this.accountService.deleteAccount(this.accounts[index].accountNumber).subscribe(
       response => {
         if(response.responseCode!=='01'){

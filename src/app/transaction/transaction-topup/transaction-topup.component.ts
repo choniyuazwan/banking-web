@@ -51,7 +51,6 @@ export class TransactionTopupComponent implements OnInit {
       }
     );
 
-    console.log('add transaction')
     this.addCusForm = this.fb.group({
       accountDebitNumber: ['', [Validators.required]],
       amount: ['', [Validators.required]]
@@ -62,7 +61,6 @@ export class TransactionTopupComponent implements OnInit {
   public onAddCus(): void {
     this.add();
     this.cancelN()
-    // this.markAsDirty(this.addCusForm);
   }
 
   openDialog(): void {
@@ -105,9 +103,7 @@ export class TransactionTopupComponent implements OnInit {
         if(response.responseCode!=='01'){
           console.log(response);
         }else{
-          // this.router.navigate(['/sidenav/transactionlist'])
           console.log(response);
-          // window.location.reload();
         }
       }
     )

@@ -1,3 +1,44 @@
-<p>
-  walletaccount-add works!
-</p>
+<div>
+    <div class="add-title">
+      <h3 class="primary">Add Account</h3>
+    </div>
+    <div>
+      <form [formGroup]="addCusForm">
+        <mat-grid-list cols="2" [cols]="breakpoint" rowHeight="85px" (window:resize)="onResize($event)">
+
+          <mat-grid-tile>
+              <div class="text-inside">
+                  <mat-form-field>
+                    <mat-label>Account Number</mat-label>
+                    <mat-select formControlName="wallet">
+                      <mat-option *ngFor="let wallet of wallets" [value]="wallet.id">
+                        {{wallet.description}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+              </div>
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+              <div class="text-inside">
+                  <mat-form-field>
+                    <mat-label>Account Number</mat-label>
+                    <mat-select formControlName="account">
+                      <mat-option *ngFor="let account of accounts" [value]="account.accountNumber">
+                        {{account.accountNumber}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+              </div>
+            </mat-grid-tile>
+
+        </mat-grid-list>
+
+        <div class="btn-sec">
+          <button mat-raised-button type="submit" color="primary" class="Update-btn" [disabled]="addCusForm.invalid" (click)="onAddCus()">Save</button>
+          <button mat-raised-button type="button" class="Discard-btn" (click)="openDialog()">Cancel</button>
+        </div>
+
+      </form>
+    </div>
+  </div>

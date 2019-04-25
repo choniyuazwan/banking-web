@@ -11,7 +11,7 @@ import { WalletaccountAddComponent } from '../walletaccount-add/walletaccount-ad
 })
 export class WalletaccountListComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'wallet', 'account'];
+  displayedColumns: string[] = ['id', 'wallet', 'account', 'delete'];
   dataSource: MatTableDataSource<WalletAccount>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -19,7 +19,7 @@ export class WalletaccountListComponent implements OnInit {
 
   constructor(private walletAccountService: WalletAccountService, public dialog: MatDialog) {  }
 
-  walletAccounts: WalletAccount[];
+  walletAccounts: WalletAccount;
 
   ngOnInit() {
     this.walletAccountService.getWalletAccounts(localStorage.getItem('cif')).subscribe(
@@ -30,7 +30,9 @@ export class WalletaccountListComponent implements OnInit {
           this.walletAccounts = response.data;
         }
 
-        this.dataSource = new MatTableDataSource(this.walletAccounts);
+        let arrayAccounts = Object.keys(this.walletAccounts).map(i => this.walletAccounts[i])
+        this.dataSource = new MatTableDataSource(arrayAccounts);
+
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       }
@@ -45,9 +47,21 @@ export class WalletaccountListComponent implements OnInit {
     }
   }
 
-  topup() {
+  add() {
     const dialogRef = this.dialog.open(WalletaccountAddComponent,{
       width: '640px', disableClose: true ,
     });
+  }
+
+  delete(index) {
+    this.walletAccountService.deleteWalletAccount(this.walletAccounts[index].id).subscribe(
+      response => {
+        if(response.responseCode!=='01'){
+          console.log(response.responseMessage);
+        }else{
+          console.log(response.responseMessage);
+        }
+      }
+    )
   }
 }
