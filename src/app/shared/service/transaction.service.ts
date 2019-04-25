@@ -21,6 +21,11 @@ export class TransactionService {
     return this.httpClient.post<CommonResponse<Transaction>>(url, transactionData);
   }
 
+  addAccount(accountData: Account): Observable<CommonResponse<Account>> {
+    let url = `http://localhost:8080/account/`;
+    return this.httpClient.post<CommonResponse<Account>>(url, accountData);
+  }
+
   getTransaction(id) {
     let url = `http://localhost:8080/transaction/${id}`;
     return this.httpClient.get<CommonResponse<Transaction>>(url);

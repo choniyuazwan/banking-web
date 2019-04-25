@@ -1,6 +1,6 @@
 <div>
     <div class="add-title">
-      <h3 class="primary">Add Account</h3>
+      <h3 class="primary">Top up</h3>
     </div>
     <div>
       <form [formGroup]="addCusForm">
@@ -9,13 +9,24 @@
           <mat-grid-tile>
             <div class="text-inside">
                 <mat-form-field>
-                  <mat-label>Wallet</mat-label>
-                  <mat-select name="walletId">
-                    <mat-option *ngFor="let walletAccount of walletAccounts" [value]="walletAccount">
-                      {{walletAccount.id}}
+                  <mat-label>Account Number</mat-label>
+                  <mat-select formControlName="accountDebitNumber">
+                    <mat-option *ngFor="let walletAccount of walletAccounts" [value]="walletAccount.account.accountNumber">
+                      {{walletAccount.account.accountNumber}}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
+            </div>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <div class="text-inside">
+              <mat-form-field>
+                <input matInput placeholder="Amount" formControlName="amount">
+                <mat-error *ngIf="addCusForm.controls['amount'].hasError('required')">
+                  Please enter balance
+                </mat-error>
+              </mat-form-field>
             </div>
           </mat-grid-tile>
         </mat-grid-list>

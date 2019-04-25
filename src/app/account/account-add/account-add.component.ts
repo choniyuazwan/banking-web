@@ -55,14 +55,6 @@ export class AccountAddComponent implements OnInit {
     this.breakpoint = event.target.innerWidth <= 600 ? 1 : 2;
   }
 
-  private markAsDirty(group: FormGroup): void {
-    group.markAsDirty();
-    // tslint:disable-next-line:forin
-    for (const i in group.controls) {
-      group.controls[i].markAsDirty();
-    }
-  }
-
   get accountName() {
     return this.addCusForm.get('accountName')
   }
