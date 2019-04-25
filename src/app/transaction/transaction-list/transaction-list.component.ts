@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AccountAddComponent } from 'src/app/account/account-add/account-add.component';
 import { TransactionTopupComponent } from '../transaction-topup/transaction-topup.component';
 import { TransactionTransferComponent } from '../transaction-transfer/transaction-transfer.component';
 import { TransactionWithdrawComponent } from '../transaction-withdraw/transaction-withdraw.component';
@@ -15,14 +14,14 @@ import { Transaction } from 'src/app/shared/model/transaction';
 export class TransactionListComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'type', 'accountDebit', 'accountCredit', 'amount', 'date'];
-  dataSource: MatTableDataSource<Account>;
+  dataSource: MatTableDataSource<Transaction>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private transactionService: TransactionService, public dialog: MatDialog) {  }
 
-  transactions: Transaction;
+  transactions: Transaction[];
 
   ngOnInit() {
     this.transactionService.getTransactions(localStorage.getItem('cif')).subscribe(
@@ -30,17 +29,14 @@ export class TransactionListComponent implements OnInit {
         if (response.responseCode !== '01') {
           alert(response.responseMessage);
         } else {
-          // alert(JSON.stringify(response.data))
-          console.log(JSON.stringify(response.data[0]))
           this.transactions = response.data;
         }
-
-        let arrayTransactions = Object.keys(this.transactions).map(i => this.transactions[i])
-        this.dataSource = new MatTableDataSource(arrayTransactions);
-
-        console.log("ini array\n\n")
-        console.log(JSON.stringify(arrayTransactions[0]))
-
+        this.transactions.forEach((element: Transaction) => {
+          if( element.accountCredit ) {
+            console.log(element.accountCredit.accountNumber)
+          }
+        });
+        this.dataSource = new MatTableDataSource(this.transactions);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       }
@@ -54,10 +50,6 @@ export class TransactionListComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-
-
-
-
 
   topup() {
     const dialogRef = this.dialog.open(TransactionTopupComponent,{
@@ -76,8 +68,4 @@ export class TransactionListComponent implements OnInit {
       width: '640px', disableClose: true ,
     });
   }
-
-
-
-
 }

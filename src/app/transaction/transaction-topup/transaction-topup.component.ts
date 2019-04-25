@@ -88,23 +88,18 @@ export class TransactionTopupComponent implements OnInit {
   customer: Customer = new Customer;
   transactionType: TransactionType = new TransactionType;
   accountDebit: Account = new Account;
+  accountCredit: Account = new Account;
 
   add() {
     let transaction = new Transaction();
     this.customer.cif = localStorage.getItem('cif');
-    this.transactionType.code = 1
-    // this.accountDebit.accountNumber = this.addCusForm.controls['accountDebitNumber'];
-    this.accountDebit.accountNumber = 2;
-    // transaction.amount = this.addCusForm.controls['amount'];
-    transaction.amount = 11111;
+    this.transactionType.code = 1;
+    this.accountDebit.accountNumber = this.addCusForm.controls['accountDebitNumber'].value;
+    transaction.amount = this.addCusForm.controls['amount'].value;
 
-    transaction.type = this.transactionType;
+    transaction.transactionType = this.transactionType;
     transaction.accountDebit = this.accountDebit;
     transaction.customer = this.customer;
-    console.log(transaction)
-    console.log('DUAAAAAAAAAAAAAA')
-    // let transactionJSON = JSON.stringify(transaction)
-    // console.log(transactionJSON)
     this.transactionService.addTransaction(transaction).subscribe(
       response => {
         if(response.responseCode!=='01'){
@@ -112,7 +107,7 @@ export class TransactionTopupComponent implements OnInit {
         }else{
           // this.router.navigate(['/sidenav/transactionlist'])
           console.log(response);
-          window.location.reload();
+          // window.location.reload();
         }
       }
     )

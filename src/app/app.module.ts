@@ -55,13 +55,18 @@ import { WalletEditComponent } from './wallet/wallet-edit/wallet-edit.component'
   // exports: [AccountAddComponent, DiscardComponent],
   entryComponents: [
     DiscardComponent,
-    AccountAddComponent,
+
     WalletAddComponent,
-    WalletAddComponent,
+    WalletEditComponent,
+
     TransactionTopupComponent,
     TransactionTransferComponent,
     TransactionWithdrawComponent,
-    AccountEditComponent
+
+    AccountAddComponent,
+    AccountEditComponent,
+
+    WalletaccountAddComponent
   ],
   imports: [
     BrowserModule,

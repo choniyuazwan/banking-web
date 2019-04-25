@@ -9,23 +9,19 @@
 
     <ng-container matColumnDef="accountNumber">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Account Number </th>
-      <!-- <td mat-cell *matCellDef="let row">{{row.accountNumber}} </td> -->
       <td mat-cell *matCellDef="let row">{{row.accountNumber}} </td>
     </ng-container>
 
-    <!-- ID Column -->
     <ng-container matColumnDef="accountName">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Account Name </th>
       <td mat-cell *matCellDef="let row"> {{row.accountName}} </td>
     </ng-container>
 
-    <!-- Progress Column -->
     <ng-container matColumnDef="balance">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Balance </th>
       <td mat-cell *matCellDef="let row"> {{row.balance}}% </td>
     </ng-container>
 
-    <!-- Name Column -->
     <ng-container matColumnDef="openDate">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Open Date </th>
       <td mat-cell *matCellDef="let row"> {{row.openDate}} </td>

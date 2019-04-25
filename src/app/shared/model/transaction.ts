@@ -4,7 +4,7 @@ import { TransactionType } from './transaction-type';
 
 export class Transaction {
   id;
-  type: TransactionType;
+  transactionType: TransactionType;
   accountDebit: Account;
   accountCredit: Account;
   amount;

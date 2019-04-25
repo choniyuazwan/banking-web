@@ -13,17 +13,12 @@ export class TransactionService {
 
   getTransactions(cif) {
     let url = `http://localhost:8080/transactions?cif=${cif}`;
-    return this.httpClient.get<CommonResponse<Transaction>>(url);
+    return this.httpClient.get<CommonResponse<Transaction[]>>(url);
   }
 
   addTransaction(transactionData: Transaction): Observable<CommonResponse<Transaction>> {
     let url = `http://localhost:8080/transaction/`;
     return this.httpClient.post<CommonResponse<Transaction>>(url, transactionData);
-  }
-
-  addAccount(accountData: Account): Observable<CommonResponse<Account>> {
-    let url = `http://localhost:8080/account/`;
-    return this.httpClient.post<CommonResponse<Account>>(url, accountData);
   }
 
   getTransaction(id) {

@@ -12,6 +12,8 @@ import { WalletListComponent } from './wallet/wallet-list/wallet-list.component'
 import { WalletaccountListComponent } from './walletaccount/walletaccount-list/walletaccount-list.component';
 import { TransactionListComponent } from './transaction/transaction-list/transaction-list.component';
 import { ProfileDetailComponent } from './profile/profile-detail/profile-detail.component';
+import { WalletAddComponent } from './wallet/wallet-add/wallet-add.component';
+import { WalletEditComponent } from './wallet/wallet-edit/wallet-edit.component';
 
 const routes: Routes = [
   { path: '', component: SidenavComponent },
@@ -26,9 +28,6 @@ const routes: Routes = [
       { path: 'walletaccountlist', component: WalletaccountListComponent },
       { path: 'transactionlist', component: TransactionListComponent },
       { path: 'profile', component: ProfileDetailComponent },
-
-      { path: 'walletlist', component: WalletListComponent },
-
     ]
   },
 ];

@@ -28,7 +28,7 @@
 
       <ng-container matColumnDef="accountCredit">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Credit </th>
-        <td mat-cell *matCellDef="let row"> {{row.accountCredit.accountNumber}} </td>
+        <td mat-cell *matCellDef="let row"> {{row.accountCredit ? row.accountCredit.accountNumber : '-'}} </td>
       </ng-container>
 
       <ng-container matColumnDef="amount">

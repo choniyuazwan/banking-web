@@ -1,8 +1,11 @@
 import { Component, OnInit, VERSION, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { DiscardComponent } from '../../discard/discard.component';
+import { WalletService } from 'src/app/shared/service/wallet.service';
+import { Customer } from 'src/app/shared/model/customer';
+import { Wallet } from 'src/app/shared/model/wallet';
 
 @Component({
   selector: 'app-wallet-add',
@@ -11,28 +14,31 @@ import { DiscardComponent } from '../../discard/discard.component';
 })
 export class WalletAddComponent implements OnInit {
 
+  constructor(
+    private fb: FormBuilder,
+    public dialog: MatDialog,
+    private route: ActivatedRoute,
+    private router: Router,
+    private walletService: WalletService
+  ) { }
+
   public breakpoint: number; // Breakpoint observer code
   public addCusForm: FormGroup;
 
-  constructor(
-    private fb: FormBuilder,
-    public dialog: MatDialog
-  ) { }
-
-  public ngOnInit(): void {
+  ngOnInit() {
+    console.log('add wallet')
     this.addCusForm = this.fb.group({
-      IdProof: null,
-       firstname: [null, [Validators.required, Validators.pattern('[a-zA-Z]+([a-zA-Z ]+)*')]],
-      email: [null, [Validators.required, Validators.email]],
-
-        address: [null ],
-
+      description: ['', [Validators.required]],
     });
     this.breakpoint = window.innerWidth <= 600 ? 1 : 2; // Breakpoint observer code
   }
 
+  public onAddCus(): void {
+    this.add();
+    this.cancelN()
+  }
+
   openDialog(): void {
-    console.log("this.addCusForm",this.addCusForm.dirty);
     if(this.addCusForm.touched) {
       const dialogRef = this.dialog.open(DiscardComponent, {
         width: '340px',
@@ -45,5 +51,32 @@ export class WalletAddComponent implements OnInit {
   // tslint:disable-next-line:no-any
   public onResize(event: any): void {
     this.breakpoint = event.target.innerWidth <= 600 ? 1 : 2;
+  }
+
+  get description() {
+    return this.addCusForm.get('description')
+  }
+
+  public cancelN(): void {
+    this.dialog.closeAll();
+  }
+
+  customer: Customer = new Customer;
+
+  add() {
+    let wallet = new Wallet();
+    wallet.description = this.addCusForm.controls['description'].value;
+    this.customer.cif = localStorage.getItem('cif');
+    wallet.customer = this.customer;
+
+    this.walletService.addWallet(wallet).subscribe(
+      response => {
+        if(response.responseCode!=='01'){
+          console.log(response);
+        }else{
+          console.log(response);
+        }
+      }
+    )
   }
 }
