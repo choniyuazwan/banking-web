@@ -1,9 +1,12 @@
-<p>
-  <button mat-raised-button (click)="topup()">topup</button>
-  <button mat-raised-button (click)="transfer()">transfer</button>
-  <button mat-raised-button (click)="withdraw()">withdraw</button>
-</p>
-
+<mat-card>
+    <h2>Transaction</h2>
+    <div class="topright">
+        <mat-chip-list >
+            <mat-chip color="primary" selected (click)="topup()" >Topup</mat-chip>
+            <mat-chip color="primary" selected (click)="transfer()" >Transfer</mat-chip>
+            <mat-chip color="primary" selected (click)="withdraw()" >Withdrawal</mat-chip>
+        </mat-chip-list>
+    </div>
 <mat-form-field>
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
   </mat-form-field>
@@ -48,3 +51,4 @@
 
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
   </div>
+</mat-card>

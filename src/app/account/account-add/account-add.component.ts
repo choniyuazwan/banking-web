@@ -6,6 +6,7 @@ import { DiscardComponent } from '../../discard/discard.component';
 import { Account } from 'src/app/shared/model/account';
 import { AccountService } from 'src/app/shared/service/account.service';
 import { Customer } from 'src/app/shared/model/customer';
+import {formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-account-add',
@@ -13,14 +14,15 @@ import { Customer } from 'src/app/shared/model/customer';
   styleUrls: ['./account-add.component.css']
 })
 export class AccountAddComponent implements OnInit {
-
+  today= new Date();
+  jstoday = '';
   constructor(
     private fb: FormBuilder,
     public dialog: MatDialog,
     private route: ActivatedRoute,
     private router: Router,
     private accountService: AccountService
-  ) { }
+  ) {this.jstoday = formatDate(this.today, 'dd-MM-yyyy hh:mm:ss a', 'en-US'); }
 
   public breakpoint: number; // Breakpoint observer code
   public addCusForm: FormGroup;
@@ -75,6 +77,9 @@ export class AccountAddComponent implements OnInit {
     account.balance = this.addCusForm.controls['balance'].value;
     this.customer.cif = localStorage.getItem('cif');
     account.customer = this.customer;
+    account.openDate = this.jstoday;
+    
+
 
     this.accountService.addAccount(account).subscribe(
       response => {

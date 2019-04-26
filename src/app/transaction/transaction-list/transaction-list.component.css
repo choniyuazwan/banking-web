@@ -1,3 +1,21 @@
+.customWidthClass{
+  flex: 1%;
+}
+.topright {
+  position: absolute;
+  top: 0.5cm;
+  right: 30px;
+  font-size: 18px;
+}
+
+mat-card {
+  width: auto;
+  margin-right: 1cm;
+  margin-left: 1cm;
+  margin-top: 1cm;
+  margin-bottom: 5px;
+}
+
 table {
   width: 100%;
 }

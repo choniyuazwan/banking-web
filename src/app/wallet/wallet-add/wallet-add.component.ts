@@ -6,6 +6,7 @@ import { DiscardComponent } from '../../discard/discard.component';
 import { WalletService } from 'src/app/shared/service/wallet.service';
 import { Customer } from 'src/app/shared/model/customer';
 import { Wallet } from 'src/app/shared/model/wallet';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-wallet-add',
@@ -13,14 +14,15 @@ import { Wallet } from 'src/app/shared/model/wallet';
   styleUrls: ['./wallet-add.component.css']
 })
 export class WalletAddComponent implements OnInit {
-
+  today= new Date();
+  jstoday = '';
   constructor(
     private fb: FormBuilder,
     public dialog: MatDialog,
     private route: ActivatedRoute,
     private router: Router,
     private walletService: WalletService
-  ) { }
+  ) {this.jstoday = formatDate(this.today, 'dd-MM-yyyy hh:mm:ss a', 'en-US')}
 
   public breakpoint: number; // Breakpoint observer code
   public addCusForm: FormGroup;
@@ -68,6 +70,7 @@ export class WalletAddComponent implements OnInit {
     wallet.description = this.addCusForm.controls['description'].value;
     this.customer.cif = localStorage.getItem('cif');
     wallet.customer = this.customer;
+    wallet.createdDate = this.jstoday;
 
     this.walletService.addWallet(wallet).subscribe(
       response => {
@@ -75,6 +78,7 @@ export class WalletAddComponent implements OnInit {
           console.log(response);
         }else{
           console.log(response);
+          window.location.reload();
         }
       }
     )

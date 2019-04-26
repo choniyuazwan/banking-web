@@ -1,5 +1,11 @@
-<button mat-raised-button (click)="add()">add</button>
 
+<mat-card>
+  <h2>List Account</h2>
+  <div class="topright">
+      <mat-chip-list >
+          <mat-chip color="primary" selected (click)="add()" >Add</mat-chip>
+      </mat-chip-list>
+  </div>
 <mat-form-field>
   <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
 </mat-form-field>
@@ -8,8 +14,8 @@
   <table mat-table [dataSource]="dataSource" matSort>
 
     <ng-container matColumnDef="accountNumber">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Account Number </th>
-      <td mat-cell *matCellDef="let row">{{row.accountNumber}} </td>
+      <th mat-header-cell *matHeaderCellDef [ngClass]="'customWidthClass'" mat-sort-header> Account Number </th>
+      <td mat-cell *matCellDef="let row" [ngClass]="'customWidthClass'">{{row.accountNumber}} </td>
     </ng-container>
 
     <ng-container matColumnDef="accountName">
@@ -19,7 +25,7 @@
 
     <ng-container matColumnDef="balance">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Balance </th>
-      <td mat-cell *matCellDef="let row"> {{row.balance}}% </td>
+      <td mat-cell *matCellDef="let row"> {{row.balance}} </td>
     </ng-container>
 
     <ng-container matColumnDef="openDate">
@@ -52,4 +58,4 @@
 
   <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
 </div>
-
+</mat-card>
