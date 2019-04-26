@@ -5,6 +5,7 @@ import { PasswordValidation } from 'src/app/shared/validator/password-validator'
 import { CustomerService } from 'src/app/shared/service/customer.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Customer } from 'src/app/shared/model/customer';
+import { MatSnackBarConfig, MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +14,7 @@ import { Customer } from 'src/app/shared/model/customer';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private fb: FormBuilder,  private route: ActivatedRoute, private router: Router, private customerService: CustomerService) { }
+  constructor(private fb: FormBuilder,  private route: ActivatedRoute, private router: Router, private customerService: CustomerService, private snackBar: MatSnackBar) { }
   registerForm: FormGroup;
 
   hide = true;
@@ -71,6 +72,15 @@ export class RegisterComponent implements OnInit {
     return this.registerForm.get('confirmPassword')
   }
 
+  openSnackBar(message: string, success?: boolean) {
+    let config = new MatSnackBarConfig();
+    // config.verticalPosition = 'bottom';
+    // config.horizontalPosition = 'center';
+    config.duration = 5000;
+    config.panelClass = success ? undefined : ['failed'];
+    this.snackBar.open(message, success ? undefined : 'Retry', config);
+  }
+
   register() {
     let customer = new Customer();
     customer.firstname = this.registerForm.controls['firstname'].value;
@@ -82,7 +92,7 @@ export class RegisterComponent implements OnInit {
     this.customerService.register(customer).subscribe(
       response => {
         if(response.responseCode!=='01'){
-          alert(response.responseMessage);
+          this.openSnackBar(response.responseMessage);
         }else{
           this.router.navigate(['/login'])
         }
