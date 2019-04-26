@@ -1,29 +1,29 @@
-<div>
-    <div class="add-title">
-      <h3 class="primary">Add Account</h3>
-    </div>
-    <div>
-      <form [formGroup]="addCusForm">
-        <mat-grid-list cols="2" [cols]="breakpoint" rowHeight="85px" (window:resize)="onResize($event)">
+<mat-card-header>
+  <mat-card-title>Edit Account</mat-card-title>
+</mat-card-header>
 
-          <mat-grid-tile>
-            <div class="text-inside">
-              <mat-form-field>
-                <input matInput placeholder="Account Name"  formControlName="accountName" required>
-                <mat-error *ngIf="addCusForm.controls['accountName'].hasError('required')">
-                  Please enter account name
-                </mat-error>
-              </mat-form-field>
-            </div>
-          </mat-grid-tile>
+<form [formGroup]="addCusForm">
+  <mat-grid-list cols="2" [cols]="breakpoint" rowHeight="85px" (window:resize)="onResize($event)">
+    
+    <mat-card-content>
+    <mat-grid-tile>
+      <div class="text-inside">
+        <mat-form-field appearance="outline">
+        <mat-label>Accoun Name</mat-label>
+          <input matInput formControlName="accountName" required>
+          <mat-error *ngIf="addCusForm.controls['accountName'].hasError('required')">
+            Please enter account name
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </mat-grid-tile>
+    </mat-card-content>
 
-        </mat-grid-list>
+  </mat-grid-list>
 
-        <div class="btn-sec">
-          <button mat-raised-button type="submit" color="primary" class="Update-btn" [disabled]="addCusForm.invalid" (click)="onAddCus()">Save</button>
-          <button mat-raised-button type="button" class="Discard-btn" (click)="openDialog()">Cancel</button>
-        </div>
-
-      </form>
-    </div>
+  <div class="button">
+    <button mat-raised-button type="submit" color="primary" class="margin" [disabled]="addCusForm.invalid" (click)="onAddCus()">Save</button>
+    <button mat-raised-button type="button" class="margin" (click)="openDialog()">Cancel</button>
   </div>
+
+</form>

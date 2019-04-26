@@ -4,7 +4,7 @@
         <mat-chip-list >
             <mat-chip color="primary" selected (click)="topup()" >Topup</mat-chip>
             <mat-chip color="primary" selected (click)="transfer()" >Transfer</mat-chip>
-            <mat-chip color="primary" selected (click)="withdraw()" >Withdrawal</mat-chip>
+            <mat-chip color="primary" selected (click)="withdraw()" >Withdraw</mat-chip>
         </mat-chip-list>
     </div>
 <mat-form-field>
@@ -36,7 +36,7 @@
 
       <ng-container matColumnDef="amount">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount </th>
-        <td mat-cell *matCellDef="let row"> {{row.amount}} </td>
+        <td mat-cell *matCellDef="let row"> {{row.amount | currency :'Rp. ' :'symbol':'0.0'}} </td>
       </ng-container>
 
       <ng-container matColumnDef="date">

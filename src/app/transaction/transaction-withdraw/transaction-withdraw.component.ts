@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBarConfig, MatSnackBar } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TransactionService } from 'src/app/shared/service/transaction.service';
 import { WalletAccountService } from 'src/app/shared/service/wallet-account.service';
@@ -24,7 +24,8 @@ export class TransactionWithdrawComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private transactionService: TransactionService,
-    private walletAccountService: WalletAccountService
+    private walletAccountService: WalletAccountService,
+    private snackBar: MatSnackBar
   ) { }
 
   get amount() {
@@ -87,6 +88,15 @@ export class TransactionWithdrawComponent implements OnInit {
   accountDebit: Account = new Account;
   accountCredit: Account = new Account;
 
+  openSnackBar(message: string, success?: boolean) {
+    let config = new MatSnackBarConfig();
+    // config.verticalPosition = 'bottom';
+    // config.horizontalPosition = 'center';
+    config.duration = 5000;
+    config.panelClass = success ? undefined : ['failed'];
+    this.snackBar.open(message, success ? undefined : 'Retry', config);
+  }
+
   add() {
     let transaction = new Transaction();
     this.customer.cif = localStorage.getItem('cif');
@@ -99,12 +109,12 @@ export class TransactionWithdrawComponent implements OnInit {
     transaction.customer = this.customer;
     this.transactionService.addTransaction(transaction).subscribe(
       response => {
-        if(response.responseCode!=='01'){
-          console.log(response);
-        }else{
-          // this.router.navigate(['/sidenav/transactionlist'])
-          console.log(response);
-          // window.location.reload();
+        if(response.responseCode=='88'){
+          this.openSnackBar(response.responseMessage);
+        } else if(response.responseCode=='99'){
+          this.openSnackBar(response.responseMessage);
+        } else {
+          this.openSnackBar("Withdraw success", true);
         }
       }
     )

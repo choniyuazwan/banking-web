@@ -1,15 +1,16 @@
-<div>
-  <div class="add-title">
-    <h3 class="primary">Add Account</h3>
-  </div>
-  <div>
-    <form [formGroup]="addCusForm">
-      <mat-grid-list cols="2" [cols]="breakpoint" rowHeight="85px" (window:resize)="onResize($event)">
+  <mat-card-header>
+    <mat-card-title>Add Account</mat-card-title>
+  </mat-card-header>
+  
+  <form [formGroup]="addCusForm">
+    <mat-grid-list cols="2" [cols]="breakpoint" rowHeight="85px" (window:resize)="onResize($event)">
+      <mat-card-content>
 
         <mat-grid-tile>
           <div class="text-inside">
-            <mat-form-field>
-              <input matInput placeholder="Account Name"  formControlName="accountName" required>
+            <mat-form-field appearance="outline">
+              <mat-label>Accoun Name</mat-label>
+              <input matInput formControlName="accountName" required>
               <mat-error *ngIf="addCusForm.controls['accountName'].hasError('required')">
                 Please enter account name
               </mat-error>
@@ -19,22 +20,21 @@
 
         <mat-grid-tile>
           <div class="text-inside">
-            <mat-form-field>
-              <input matInput placeholder="Balance" formControlName="balance" required>
+            <mat-form-field appearance="outline">
+              <mat-label>Balance</mat-label>
+              <input matInput formControlName="balance" required>
               <mat-error *ngIf="addCusForm.controls['balance'].hasError('required')">
                 Please enter balance
               </mat-error>
             </mat-form-field>
           </div>
         </mat-grid-tile>
-      </mat-grid-list>
+      </mat-card-content>
 
-      <div class="btn-sec">
-        <button mat-raised-button type="submit" color="primary" class="Update-btn" [disabled]="addCusForm.invalid" (click)="onAddCus()">Save</button>
-        <button mat-raised-button type="button" class="Discard-btn" (click)="openDialog()">Cancel</button>
-      </div>
-     
+    </mat-grid-list>
 
-    </form>
-  </div>
-</div>
+    <div class="button">
+      <button mat-raised-button type="submit" color="primary" class="margin" [disabled]="addCusForm.invalid" (click)="onAddCus()">Save</button>
+      <button mat-raised-button type="button" class="margin" (click)="openDialog()">Cancel</button>
+    </div>
+  </form>

@@ -1,27 +1,27 @@
-<div>
-  <div class="add-title">
-    <h2 class="primary">Registration Form</h2>
-  </div>
-  <div>
-    <form [formGroup]="addCusForm">
-      <mat-grid-list cols="2" [cols]="breakpoint" rowHeight="85px" (window:resize)="onResize($event)">
-        <mat-grid-tile>
-          <div class="text-inside">
-            <mat-form-field>
-              <input matInput placeholder="Description"  formControlName="description" required>
-              <mat-error *ngIf="addCusForm.controls['description'].hasError('required')">
-                Please enter first name
-              </mat-error>
-            </mat-form-field>
-          </div>
-        </mat-grid-tile>
-      </mat-grid-list>
+<mat-card-header>
+  <mat-card-title>Add Wallet</mat-card-title>
+</mat-card-header>
 
-      <div class="btn-sec">
-        <button mat-raised-button type="submit" color="primary" class="Update-btn" [disabled]="addCusForm.invalid" (click)="onAddCus()">Save</button>
-        <button mat-raised-button type="button" class="Discard-btn" (click)="openDialog()">Cancel</button>
+<form [formGroup]="addCusForm">
+  <mat-grid-list cols="2" [cols]="breakpoint" rowHeight="85px" (window:resize)="onResize($event)">
+    <mat-card-content>
+    <mat-grid-tile>
+      <div class="text-inside">
+        <mat-form-field appearance="outline">
+          <mat-label>Description</mat-label>
+          <input matInput formControlName="description" required>
+          <mat-error *ngIf="addCusForm.controls['description'].hasError('required')">
+            Please enter first name
+          </mat-error>
+        </mat-form-field>
       </div>
+    </mat-grid-tile>
+    </mat-card-content>
+  </mat-grid-list>
 
-    </form>
+  <div class="button">
+    <button mat-raised-button type="submit" color="primary" class="margin" [disabled]="addCusForm.invalid" (click)="onAddCus()">Save</button>
+    <button mat-raised-button type="button" class="margin" (click)="openDialog()">Cancel</button>
   </div>
-</div>
+
+</form>

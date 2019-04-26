@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar, MatSnackBarConfig } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TransactionService } from 'src/app/shared/service/transaction.service';
 import { DiscardComponent } from 'src/app/discard/discard.component';
@@ -26,7 +26,8 @@ export class TransactionTopupComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private transactionService: TransactionService,
-    private walletAccountService: WalletAccountService
+    private walletAccountService: WalletAccountService,
+    private snackBar: MatSnackBar
   ) { }
 
   get amount() {
@@ -88,6 +89,15 @@ export class TransactionTopupComponent implements OnInit {
   accountDebit: Account = new Account;
   accountCredit: Account = new Account;
 
+  openSnackBar(message: string, success?: boolean) {
+    let config = new MatSnackBarConfig();
+    // config.verticalPosition = 'bottom';
+    // config.horizontalPosition = 'center';
+    config.duration = 5000;
+    config.panelClass = success ? undefined : ['failed'];
+    this.snackBar.open(message, success ? undefined : 'Retry', config);
+  }
+
   add() {
     let transaction = new Transaction();
     this.customer.cif = localStorage.getItem('cif');
@@ -101,9 +111,9 @@ export class TransactionTopupComponent implements OnInit {
     this.transactionService.addTransaction(transaction).subscribe(
       response => {
         if(response.responseCode!=='01'){
-          console.log(response);
-        }else{
-          console.log(response);
+          this.openSnackBar("There is any failure");
+        } else {
+          this.openSnackBar("Top up success", true);
         }
       }
     )
