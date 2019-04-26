@@ -84,7 +84,6 @@ export class AccountEditComponent implements OnInit {
         if(response.responseCode!=='01'){
           console.log(response);
         }else{
-          // this.router.navigate(['/sidenav/accountlist'])
           console.log(response);
         }
       }

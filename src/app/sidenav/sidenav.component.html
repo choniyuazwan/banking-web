@@ -15,11 +15,10 @@
           <mat-icon class="icon">{{nav.icon}}</mat-icon>
           {{nav.name}}
         </a>
-        <!-- <a mat-list-item [routerLink]="/login">
-          <mat-icon class="icon">input</mat-icon>
+        <a mat-list-item (click)="logout()">
+          <mat-icon class="icon">exit_to_app</mat-icon>
           Logout
-        </a> -->
-        <!-- { name:"Logout", route:"/login", icon:"input" }, -->
+        </a>
       </mat-nav-list>
     </mat-sidenav>
 

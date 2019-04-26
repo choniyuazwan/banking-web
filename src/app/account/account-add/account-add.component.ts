@@ -1,5 +1,5 @@
 import { Component, OnInit, VERSION, ViewChild, HostListener, Inject } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DiscardComponent } from '../../discard/discard.component';
@@ -39,7 +39,6 @@ export class AccountAddComponent implements OnInit {
   public onAddCus(): void {
     this.add();
     this.cancelN()
-    // this.markAsDirty(this.addCusForm);
   }
 
   openDialog(): void {
@@ -78,19 +77,16 @@ export class AccountAddComponent implements OnInit {
     this.customer.cif = localStorage.getItem('cif');
     account.customer = this.customer;
     account.openDate = this.jstoday;
-    
-
-
+  
     this.accountService.addAccount(account).subscribe(
       response => {
         if(response.responseCode!=='01'){
           console.log(response);
         }else{
-          // this.router.navigate(['/sidenav/accountlist'])
           console.log(response);
-          window.location.reload();
         }
       }
     )
   }
+
 }

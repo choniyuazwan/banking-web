@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidenav',
@@ -12,13 +13,12 @@ export class SidenavComponent implements OnInit {
 
   // fillerNav = Array.from({length: 50}, (_, i) => `Nav Item ${i + 1}`);
   fillerNav = [
-    { name:"Dashboard", route:"/sidenav", icon:"home" },
-    { name:"Account", route:"accountlist", icon:"credit_card" },
-    { name:"Wallet", route:"walletlist", icon:"account_balance_wallet" },
-    { name:"Wallet Account", route:"walletaccountlist", icon:"all_inbox" },
-    { name:"Transaction", route:"transactionlist", icon:"swap_horiz" },
-    { name:"Profile", route:"profile", icon:"account_circle" },
-    { name:"Logout", route:"/login", icon:"input" },
+    { name:"Dashboard", route:"/dashboard", icon:"home" },
+    { name:"Account", route:"/accountlist", icon:"credit_card" },
+    { name:"Wallet", route:"/walletlist", icon:"account_balance_wallet" },
+    { name:"Wallet Account", route:"/walletaccountlist", icon:"all_inbox" },
+    { name:"Transaction", route:"/transactionlist", icon:"swap_horiz" },
+    { name:"Profile", route:"/profile", icon:"account_circle" },
   ]
 
   // fillerContent = Array.from({length: 50}, () =>
@@ -30,10 +30,15 @@ export class SidenavComponent implements OnInit {
 
   private _mobileQueryListener: () => void;
 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
+  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private router:Router) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
+  }
+
+  logout() {
+    localStorage.removeItem('cif');
+    this.router.navigate(['/login']);
   }
 
   ngOnDestroy(): void {

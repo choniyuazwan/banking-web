@@ -21,4 +21,9 @@ export class CustomerService {
     let url = `http://localhost:8080/customer`;
     return this.httpClient.post<CommonResponse<Customer>>(url, registerData);
   }
+
+  getCustomer(username) {
+    let url = `http://localhost:8080/account/${username}`;
+    return this.httpClient.get<CommonResponse<Customer>>(url);
+  }
 }

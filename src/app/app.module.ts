@@ -27,7 +27,7 @@ import { ProfileDetailComponent } from './profile/profile-detail/profile-detail.
 import { DiscardComponent } from './discard/discard.component';
 import { AccountEditComponent } from './account/account-edit/account-edit.component';
 import { WalletEditComponent } from './wallet/wallet-edit/wallet-edit.component';
-import { HomeComponent } from './home/home.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +52,7 @@ import { HomeComponent } from './home/home.component';
     DiscardComponent,
     AccountEditComponent,
     WalletEditComponent,
-    HomeComponent,
+    DashboardComponent,
   ],
   // exports: [AccountAddComponent, DiscardComponent],
   entryComponents: [

@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
         } else {
           this.customer = response.data;
           localStorage.setItem('cif', response.data.cif)
-          this.router.navigate(['/sidenav'])
+          this.router.navigate(['/dashboard'])
         }
       }
     );

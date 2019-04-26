@@ -19,7 +19,19 @@ export class RegisterComponent implements OnInit {
   hide = true;
   hide2 = true;
 
+  checkCustomer = new Customer();
+
   ngOnInit() {
+    // this.customerService.getCustomer(this.username).subscribe(
+    //   response => {
+    //     if(response.responseCode!=='01'){
+    //       alert("username sudah ada");
+    //     }else{
+    //       this.checkCustomer = response.data;
+    //     }
+    //   }
+    // )
+
     this.registerForm = this.fb.group({
       firstname: ['', [Validators.required]],
       lastname: ['', [Validators.required]],
