@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Customer } from 'src/app/shared/model/customer';
 import { CustomerService } from 'src/app/shared/service/customer.service';
 import { Login } from 'src/app/shared/model/login';
+import { MatSnackBar } from '@angular/material';
 
 
 /** @title Simple form field */
@@ -14,7 +15,14 @@ import { Login } from 'src/app/shared/model/login';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private customerService: CustomerService) { }
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 5000,
+      panelClass: `color: #3D5AFE`
+    });
+  }
+
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private customerService: CustomerService, private snackBar: MatSnackBar) { }
 
   get username() {
     return this.loginForm.get('username');
@@ -51,7 +59,7 @@ export class LoginComponent implements OnInit {
     this.customerService.login(new Login(this.loginForm.get('username').value, this.loginForm.get('password').value)).subscribe(
       response => {
         if (response.responseCode !== '01') {
-          alert(response.responseMessage);
+          this.openSnackBar("Invalid username or password", "Retry");
         } else {
           this.customer = response.data;
           localStorage.setItem('cif', response.data.cif)

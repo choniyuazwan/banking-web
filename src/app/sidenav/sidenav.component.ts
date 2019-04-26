@@ -18,7 +18,6 @@ export class SidenavComponent implements OnInit {
     { name:"Wallet", route:"/walletlist", icon:"account_balance_wallet" },
     { name:"Wallet Account", route:"/walletaccountlist", icon:"all_inbox" },
     { name:"Transaction", route:"/transactionlist", icon:"swap_horiz" },
-    { name:"Profile", route:"/profile", icon:"account_circle" },
   ]
 
   // fillerContent = Array.from({length: 50}, () =>

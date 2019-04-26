@@ -1,7 +1,15 @@
 <div class="example-container" [class.example-is-mobile]="mobileQuery.matches" *ngIf="shouldRun">
   <mat-toolbar color="primary" class="example-toolbar">
     <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
-    <h1 class="example-app-name">Banking</h1>
+    <!-- <h1 class="example-app-name">Banking</h1> -->
+    <span>Banking</span>
+    <span class="spacer"></span>
+    <button routerLink="/profile" mat-icon-button>
+      <mat-icon>account_circle</mat-icon>
+    </button>
+    <button mat-icon-button (click)="logout()">
+      <mat-icon>exit_to_app</mat-icon>
+    </button>
   </mat-toolbar>
 
   <mat-sidenav-container class="example-sidenav-container"
@@ -14,10 +22,6 @@
         <a mat-list-item [routerLink]="nav.route" *ngFor="let nav of fillerNav">
           <mat-icon class="icon">{{nav.icon}}</mat-icon>
           {{nav.name}}
-        </a>
-        <a mat-list-item (click)="logout()">
-          <mat-icon class="icon">exit_to_app</mat-icon>
-          Logout
         </a>
       </mat-nav-list>
     </mat-sidenav>
