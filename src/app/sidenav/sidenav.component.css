@@ -49,3 +49,8 @@ mat-sidenav {
 span {
   padding-right: 1rem;
 }
+
+.size{
+  font-size: 30px;
+  margin-right: 5px;
+}

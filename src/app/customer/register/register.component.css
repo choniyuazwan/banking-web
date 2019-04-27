@@ -1,12 +1,76 @@
 :host {
   display: flex;
   justify-content: center;
-  margin: 100px 0px;
+  /* margin: 100px 0px; */
 }
+
+.f1{
+  color: white;
+  display: flex;
+  font-family: Arial narrow;
+  margin-right: 2px;
+    margin-left: 4cm;
+    margin-top: 1cm;
+    margin-bottom: 1px;
+  }
+  
+  .f2{
+    color: white;
+    display: flex;
+    font-family: Arial narrow;
+    margin-right: 2px;
+      margin-left: 4cm;
+      margin-top: 0cm;
+      margin-bottom: 1px;
+    }
+    
+  
+  .example-button-row button {
+    border-color: white;
+    color: white;
+    margin-right: 8px;
+    margin-left: 5cm;
+    margin-top: 1.3cm;
+    margin-bottom: 10px;
+    width: 5cm;
+    height: 1.5cm;
+    font-size: 15pt;
+    border-radius: 5px;
+    display: flex;
+    
+  }
 
 .mat-form-field {
   width: 100%;
   min-width: 300px;
+}
+
+.a {
+  color: azure;
+  font-family: forte;
+  background-size: cover
+}
+
+mat-card {
+  /* height: 15cm; */
+  margin-top: 0.5cm;
+  margin-bottom: 0.5cm;
+  margin-left: 0.5cm;
+  margin-right: 0.5cm;
+}
+
+.kiri {
+  width: 70%;
+  height: 15.5cm;
+  background: url(a.svg);
+  background-size: 150%;
+  box-shadow: none;
+}
+
+.kanan{
+  width: 20%;
+  
+  min-width: 8cm;
 }
 
 mat-card-header,
@@ -14,6 +78,7 @@ mat-card-title,
 mat-card-content {
   display: flex;
   justify-content: center;
+  width: auto;
 }
 
 /* .error {
