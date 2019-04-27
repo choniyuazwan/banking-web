@@ -7,6 +7,7 @@ import { WalletService } from 'src/app/shared/service/wallet.service';
 import { Customer } from 'src/app/shared/model/customer';
 import { Wallet } from 'src/app/shared/model/wallet';
 import { formatDate } from '@angular/common';
+import { UtilService } from 'src/app/shared/util/util.service';
 
 @Component({
   selector: 'app-wallet-add',
@@ -21,7 +22,8 @@ export class WalletAddComponent implements OnInit {
     public dialog: MatDialog,
     private route: ActivatedRoute,
     private router: Router,
-    private walletService: WalletService
+    private walletService: WalletService,
+    public utilService: UtilService
   ) {this.jstoday = formatDate(this.today, 'dd-MM-yyyy hh:mm:ss a', 'en-US')}
 
   public breakpoint: number; // Breakpoint observer code
@@ -75,10 +77,9 @@ export class WalletAddComponent implements OnInit {
     this.walletService.addWallet(wallet).subscribe(
       response => {
         if(response.responseCode!=='01'){
-          console.log(response);
+          this.utilService.openSnackBar('Failed add new wallet')
         }else{
-          console.log(response);
-          window.location.reload();
+          this.utilService.openSnackBar('Add new wallet success', true)
         }
       }
     )

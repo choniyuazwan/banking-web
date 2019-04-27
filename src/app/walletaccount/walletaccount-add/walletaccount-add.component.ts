@@ -10,6 +10,7 @@ import { Account } from 'src/app/shared/model/account';
 import { Customer } from 'src/app/shared/model/customer';
 import { Wallet } from 'src/app/shared/model/wallet';
 import { WalletService } from 'src/app/shared/service/wallet.service';
+import { UtilService } from 'src/app/shared/util/util.service';
 
 
 @Component({
@@ -26,7 +27,8 @@ export class WalletaccountAddComponent implements OnInit {
     private router: Router,
     private walletAccountService: WalletAccountService,
     private walletService: WalletService,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private utilService:UtilService
   ) { }
 
   public breakpoint: number; // Breakpoint observer code
@@ -111,9 +113,9 @@ export class WalletaccountAddComponent implements OnInit {
     this.walletAccountService.addWalletAccount(walletAccount).subscribe(
       response => {
         if(response.responseCode!=='01'){
-          console.log(response.responseMessage);
+          this.utilService.openSnackBar('Failed register account')
         }else{
-          console.log(response.responseMessage);
+          this.utilService.openSnackBar('Register account success', true)
         }
       }
     )

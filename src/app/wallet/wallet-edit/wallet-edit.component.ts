@@ -6,6 +6,7 @@ import { WalletService } from 'src/app/shared/service/wallet.service';
 import { Wallet } from 'src/app/shared/model/wallet';
 import { DiscardComponent } from 'src/app/discard/discard.component';
 import { Customer } from 'src/app/shared/model/customer';
+import { UtilService } from 'src/app/shared/util/util.service';
 
 @Component({
   selector: 'app-wallet-edit',
@@ -20,6 +21,7 @@ export class WalletEditComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private walletService: WalletService,
+    private utilService: UtilService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { console.log(this.data) }
 
@@ -80,9 +82,9 @@ export class WalletEditComponent implements OnInit {
     this.walletService.editWallet(this.wallet).subscribe(
       response => {
         if(response.responseCode!=='01'){
-          console.log(response.responseMessage);
+          this.utilService.openSnackBar('Failed edit wallet');
         }else{
-          console.log(response.responseMessage);
+          this.utilService.openSnackBar('Edit wallet success', true)
         }
       }
     )

@@ -4,6 +4,7 @@ import { WalletAddComponent } from '../wallet-add/wallet-add.component';
 import { Wallet } from 'src/app/shared/model/wallet';
 import { WalletService } from 'src/app/shared/service/wallet.service';
 import { WalletEditComponent } from '../wallet-edit/wallet-edit.component';
+import { UtilService } from 'src/app/shared/util/util.service';
 
 @Component({
   selector: 'app-wallet-list',
@@ -40,7 +41,7 @@ export class WalletListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private walletService: WalletService, public dialog: MatDialog) {  }
+  constructor(private walletService: WalletService, public dialog: MatDialog, private utilService: UtilService) {  }
 
   wallets:Wallet;
 
@@ -89,9 +90,9 @@ export class WalletListComponent implements OnInit {
     this.walletService.deleteWallet(this.wallets[index].id).subscribe(
       response => {
         if(response.responseCode!=='01'){
-          console.log(response);
+          this.utilService.openSnackBar('Failed delete wallet')
         }else{
-          console.log(response);
+          this.utilService.openSnackBar('Wallet has been deleted successfully', true)
         }
       }
     )
