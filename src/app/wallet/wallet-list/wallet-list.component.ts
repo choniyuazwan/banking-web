@@ -11,7 +11,28 @@ import { WalletEditComponent } from '../wallet-edit/wallet-edit.component';
   styleUrls: ['./wallet-list.component.css']
 })
 export class WalletListComponent implements OnInit {
+  
+  ngAfterContentChecked(): void {
+    this.calllist()
+  }
 
+  calllist(){
+    this.walletService.getWallets(localStorage.getItem('cif')).subscribe(
+      response => {
+        if (response.responseCode !== '01') {
+          alert(response.responseMessage);
+        } else {
+          this.wallets = response.data;
+        }
+
+        let arrayWallets = Object.keys(this.wallets).map(i => this.wallets[i])
+        this.dataSource = new MatTableDataSource(arrayWallets);
+
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      }
+    );
+  }
 
   displayedColumns: string[] = ['id', 'description', 'createdDate', 'edit', 'delete'];
   dataSource: MatTableDataSource<Wallet>;

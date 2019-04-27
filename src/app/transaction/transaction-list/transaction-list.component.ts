@@ -13,6 +13,30 @@ import { Transaction } from 'src/app/shared/model/transaction';
 })
 export class TransactionListComponent implements OnInit {
 
+  ngAfterContentChecked(): void {
+    this.calllist()
+  }
+
+  calllist(){
+    this.transactionService.getTransactions(localStorage.getItem('cif')).subscribe(
+      response => {
+        if (response.responseCode !== '01') {
+          alert(response.responseMessage);
+        } else {
+          this.transactions = response.data;
+        }
+        this.transactions.forEach((element: Transaction) => {
+          if( element.accountCredit ) {
+            console.log(element.accountCredit.accountNumber)
+          }
+        });
+        this.dataSource = new MatTableDataSource(this.transactions);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      }
+    );
+  }
+
   displayedColumns: string[] = ['id', 'type', 'accountDebit', 'accountCredit', 'amount', 'date'];
   dataSource: MatTableDataSource<Transaction>;
 

@@ -10,6 +10,7 @@ import { Customer } from 'src/app/shared/model/customer';
 import { TransactionType } from 'src/app/shared/model/transaction-type';
 import { Account } from 'src/app/shared/model/account';
 import { Transaction } from 'src/app/shared/model/transaction';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-transaction-transfer',
@@ -17,6 +18,8 @@ import { Transaction } from 'src/app/shared/model/transaction';
   styleUrls: ['./transaction-transfer.component.css']
 })
 export class TransactionTransferComponent implements OnInit {
+  today= new Date();
+  jstoday = '';
 
   constructor(
     private fb: FormBuilder,
@@ -26,7 +29,7 @@ export class TransactionTransferComponent implements OnInit {
     private transactionService: TransactionService,
     private walletAccountService: WalletAccountService, 
     private snackBar: MatSnackBar
-  ) { }
+  ) { this.jstoday = formatDate(this.today, 'dd-MM-yyyy hh:mm:ss a', 'en-US');  }
 
   get amount() {
     return this.addCusForm.get('amount')
@@ -115,6 +118,8 @@ export class TransactionTransferComponent implements OnInit {
     transaction.accountDebit = this.accountDebit;
     transaction.accountCredit = this.accountCredit;
     transaction.customer = this.customer;
+    transaction.date = this.jstoday;
+
     this.transactionService.addTransaction(transaction).subscribe(
       response => {
         if(response.responseCode=='404'){

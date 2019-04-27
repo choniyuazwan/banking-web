@@ -1,48 +1,58 @@
+
 :host {
   display: flex;
   justify-content: center;
   /* margin: 100px 0px; */
+  /* background: #3395e0; */
+
+}
+.f1{
+color: white;
+display: flex;
+font-family: Arial narrow;
+margin-right: 2px;
+  margin-left: 4cm;
+  margin-top: 1cm;
+  margin-bottom: 1px;
 }
 
-.f1{
+.f2{
   color: white;
   display: flex;
   font-family: Arial narrow;
   margin-right: 2px;
     margin-left: 4cm;
-    margin-top: 1cm;
+    margin-top: 0cm;
     margin-bottom: 1px;
   }
   
-  .f2{
-    color: white;
-    display: flex;
-    font-family: Arial narrow;
-    margin-right: 2px;
-      margin-left: 4cm;
-      margin-top: 0cm;
-      margin-bottom: 1px;
-    }
-    
-  
-  .example-button-row button {
-    border-color: white;
-    color: white;
-    margin-right: 8px;
-    margin-left: 5cm;
-    margin-top: 1.3cm;
-    margin-bottom: 10px;
-    width: 5cm;
-    height: 1.5cm;
-    font-size: 15pt;
-    border-radius: 5px;
-    display: flex;
-    
-  }
 
+.example-button-row button {
+  border-color: white;
+  color: white;
+  margin-right: 8px;
+  margin-left: 5cm;
+  margin-top: 1.3cm;
+  margin-bottom: 10px;
+  width: 5cm;
+  height: 1.5cm;
+  font-size: 15pt;
+  border-radius: 5px;
+  display: flex;
+  
+}
+
+/* .background{
+  display: flex;
+  justify-content: center;
+
+  background: #3395e0;
+} */
 .mat-form-field {
   width: 100%;
   min-width: 300px;
+  height: 60px;
+  
 }
 
 .a {
@@ -57,6 +67,7 @@ mat-card {
   margin-bottom: 0.5cm;
   margin-left: 0.5cm;
   margin-right: 0.5cm;
+
 }
 
 .kiri {
@@ -65,6 +76,7 @@ mat-card {
   background: url(a.svg);
   background-size: 150%;
   box-shadow: none;
+
 }
 
 .kanan{

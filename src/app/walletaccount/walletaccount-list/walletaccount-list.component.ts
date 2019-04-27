@@ -10,6 +10,27 @@ import { WalletaccountAddComponent } from '../walletaccount-add/walletaccount-ad
   styleUrls: ['./walletaccount-list.component.css']
 })
 export class WalletaccountListComponent implements OnInit {
+  ngAfterContentChecked(): void {
+    this.calllist()
+  }
+
+  calllist(){
+    this.walletAccountService.getWalletAccounts(localStorage.getItem('cif')).subscribe(
+      response => {
+        if (response.responseCode !== '01') {
+          alert(response.responseMessage);
+        } else {
+          this.walletAccounts = response.data;
+        }
+
+        let arrayAccounts = Object.keys(this.walletAccounts).map(i => this.walletAccounts[i])
+        this.dataSource = new MatTableDataSource(arrayAccounts);
+
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      }
+    );
+  }
 
   displayedColumns: string[] = ['id', 'wallet', 'account', 'delete'];
   dataSource: MatTableDataSource<WalletAccount>;

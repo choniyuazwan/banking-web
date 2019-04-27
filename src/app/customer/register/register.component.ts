@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { existEmailValidator } from 'src/app/shared/validator/exist-email';
 import { PasswordValidation } from 'src/app/shared/validator/password-validator';
@@ -14,8 +14,12 @@ import { MatSnackBarConfig, MatSnackBar } from '@angular/material';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private fb: FormBuilder,  private route: ActivatedRoute, private router: Router, private customerService: CustomerService, private snackBar: MatSnackBar) { }
+  constructor(private fb: FormBuilder,  private route: ActivatedRoute, private router: Router, private customerService: CustomerService, private snackBar: MatSnackBar, private elementRef:ElementRef) { }
   registerForm: FormGroup;
+
+  ngAfterViewInit(){
+    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor =  '#3395e0';
+  }
 
   hide = true;
   hide2 = true;

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterContentChecked } from '@angular/core';
 import { AccountService } from 'src/app/shared/service/account.service';
 import { MatDialog, MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import { AccountAddComponent } from '../account-add/account-add.component';
@@ -11,7 +11,10 @@ import { AccountEditComponent } from '../account-edit/account-edit.component';
   templateUrl: './account-list.component.html',
   styleUrls: ['./account-list.component.css']
 })
-export class AccountListComponent implements OnInit {
+export class AccountListComponent implements OnInit, AfterContentChecked {
+  ngAfterContentChecked(): void {
+    this.calllist()
+  }
 
   displayedColumns: string[] = ['accountNumber', 'accountName', 'balance', 'openDate', 'edit', 'delete'];
   dataSource: MatTableDataSource<Account>;
@@ -63,6 +66,26 @@ export class AccountListComponent implements OnInit {
         accountNumber : this.accounts[index].accountNumber
       }
     });
+  }
+
+  calllist(){
+    
+    this.accountService.getAccounts(localStorage.getItem('cif')).subscribe(
+      response => {
+        if (response.responseCode !== '01') {
+          alert(response.responseMessage);
+        } else {
+          // alert(JSON.stringify(response.data))
+          this.accounts = response.data;
+        }
+
+        let arrayAccounts = Object.keys(this.accounts).map(i => this.accounts[i])
+        this.dataSource = new MatTableDataSource(arrayAccounts);
+
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      }
+    );
   }
 
   delete(index) {

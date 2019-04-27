@@ -12,6 +12,7 @@ import { Wallet } from 'src/app/shared/model/wallet';
 import { WalletService } from 'src/app/shared/service/wallet.service';
 import { WalletAccountService } from 'src/app/shared/service/wallet-account.service';
 import { WalletAccount } from 'src/app/shared/model/wallet-account';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-transaction-topup',
@@ -19,7 +20,8 @@ import { WalletAccount } from 'src/app/shared/model/wallet-account';
   styleUrls: ['./transaction-topup.component.css']
 })
 export class TransactionTopupComponent implements OnInit {
-
+  today= new Date();
+  jstoday = '';
   constructor(
     private fb: FormBuilder,
     public dialog: MatDialog,
@@ -28,7 +30,7 @@ export class TransactionTopupComponent implements OnInit {
     private transactionService: TransactionService,
     private walletAccountService: WalletAccountService,
     private snackBar: MatSnackBar
-  ) { }
+  ) { this.jstoday = formatDate(this.today, 'dd-MM-yyyy hh:mm:ss a', 'en-US'); }
 
   get amount() {
     return this.addCusForm.get('amount')
@@ -108,6 +110,8 @@ export class TransactionTopupComponent implements OnInit {
     transaction.transactionType = this.transactionType;
     transaction.accountDebit = this.accountDebit;
     transaction.customer = this.customer;
+    transaction.date = this.jstoday;
+
     this.transactionService.addTransaction(transaction).subscribe(
       response => {
         if(response.responseCode!=='01'){

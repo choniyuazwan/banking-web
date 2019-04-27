@@ -10,6 +10,7 @@ import { Customer } from 'src/app/shared/model/customer';
 import { TransactionType } from 'src/app/shared/model/transaction-type';
 import { Account } from 'src/app/shared/model/account';
 import { Transaction } from 'src/app/shared/model/transaction';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-transaction-withdraw',
@@ -17,6 +18,8 @@ import { Transaction } from 'src/app/shared/model/transaction';
   styleUrls: ['./transaction-withdraw.component.css']
 })
 export class TransactionWithdrawComponent implements OnInit {
+  today= new Date();
+  jstoday = '';
 
   constructor(
     private fb: FormBuilder,
@@ -26,7 +29,7 @@ export class TransactionWithdrawComponent implements OnInit {
     private transactionService: TransactionService,
     private walletAccountService: WalletAccountService,
     private snackBar: MatSnackBar
-  ) { }
+  ) {  this.jstoday = formatDate(this.today, 'dd-MM-yyyy hh:mm:ss a', 'en-US');}
 
   get amount() {
     return this.addCusForm.get('amount')
@@ -107,6 +110,8 @@ export class TransactionWithdrawComponent implements OnInit {
     transaction.transactionType = this.transactionType;
     transaction.accountDebit = this.accountDebit;
     transaction.customer = this.customer;
+    transaction.date = this.jstoday;
+
     this.transactionService.addTransaction(transaction).subscribe(
       response => {
         if(response.responseCode=='88'){
