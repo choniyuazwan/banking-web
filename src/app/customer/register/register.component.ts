@@ -98,6 +98,7 @@ export class RegisterComponent implements OnInit {
         if(response.responseCode!=='01'){
           this.openSnackBar(response.responseMessage);
         }else{
+          this.openSnackBar("Register success", true);
           this.router.navigate(['/login'])
         }
       }

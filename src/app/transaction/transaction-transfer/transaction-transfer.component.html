@@ -9,10 +9,10 @@
         <mat-grid-tile>
           <div class="text-inside">
               <mat-form-field appearance="outline">
-                <mat-label>Your Account</mat-label>
+                <mat-label>Wallet --- Account</mat-label>
                 <mat-select formControlName="accountDebitNumber">
                   <mat-option *ngFor="let walletAccount of walletAccounts" [value]="walletAccount.account.accountNumber">
-                      {{walletAccount.wallet.description}} - {{walletAccount.account.accountNumber}}
+                      {{walletAccount.wallet.description}} --- {{walletAccount.account.accountNumber}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
@@ -23,7 +23,7 @@
           <div class="text-inside">
             <mat-form-field appearance="outline">
               <mat-label>Destination Account</mat-label>
-              <input matInput formControlName="accountCreditNumber">
+              <input type="number" matInput formControlName="accountCreditNumber">
               <mat-error *ngIf="addCusForm.controls['accountCreditNumber'].hasError('required')">
                 Please enter destinantion account
               </mat-error>
@@ -35,7 +35,7 @@
           <div class="text-inside">
             <mat-form-field appearance="outline">
               <mat-label>Amount</mat-label>
-              <input matInput formControlName="amount">
+              <input type="number" matInput formControlName="amount">
               <mat-error *ngIf="addCusForm.controls['amount'].hasError('required')">
                 Please enter amount
               </mat-error>

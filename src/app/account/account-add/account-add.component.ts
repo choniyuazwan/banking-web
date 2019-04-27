@@ -1,5 +1,5 @@
 import { Component, OnInit, VERSION, ViewChild, HostListener, Inject } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatTableDataSource, MatPaginator, MatSort, MatSnackBarConfig, MatSnackBar } from '@angular/material';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DiscardComponent } from '../../discard/discard.component';
@@ -21,7 +21,8 @@ export class AccountAddComponent implements OnInit {
     public dialog: MatDialog,
     private route: ActivatedRoute,
     private router: Router,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private snackBar: MatSnackBar
   ) {this.jstoday = formatDate(this.today, 'dd-MM-yyyy hh:mm:ss a', 'en-US'); }
 
   public breakpoint: number; // Breakpoint observer code
@@ -70,6 +71,15 @@ export class AccountAddComponent implements OnInit {
 
   customer: Customer = new Customer;
 
+  openSnackBar(message: string, success?: boolean) {
+    let config = new MatSnackBarConfig();
+    // config.verticalPosition = 'bottom';
+    // config.horizontalPosition = 'center';
+    config.duration = 5000;
+    config.panelClass = success ? undefined : ['failed'];
+    this.snackBar.open(message, success ? undefined : 'Retry', config);
+  }
+
   add() {
     let account = new Account();
     account.accountName = this.addCusForm.controls['accountName'].value;
@@ -81,9 +91,9 @@ export class AccountAddComponent implements OnInit {
     this.accountService.addAccount(account).subscribe(
       response => {
         if(response.responseCode!=='01'){
-          console.log(response);
+          this.openSnackBar("Failed add account");
         }else{
-          console.log(response);
+          this.openSnackBar("Add new account success", true);
         }
       }
     )

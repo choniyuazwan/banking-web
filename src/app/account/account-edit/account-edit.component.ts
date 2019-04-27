@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MAT_DIALOG_DATA, MatSnackBar, MatSnackBarConfig } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AccountService } from 'src/app/shared/service/account.service';
 import { DiscardComponent } from 'src/app/discard/discard.component';
@@ -20,6 +20,7 @@ export class AccountEditComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private accountService: AccountService,
+    private snackBar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { console.log(this.data) }
 
@@ -77,14 +78,23 @@ export class AccountEditComponent implements OnInit {
 
   customer: Customer = new Customer;
 
+  openSnackBar(message: string, success?: boolean) {
+    let config = new MatSnackBarConfig();
+    // config.verticalPosition = 'bottom';
+    // config.horizontalPosition = 'center';
+    config.duration = 5000;
+    config.panelClass = success ? undefined : ['failed'];
+    this.snackBar.open(message, success ? undefined : 'Retry', config);
+  }
+  
   edit() {
     this.account.accountName = this.addCusForm.controls['accountName'].value;
     this.accountService.editAccount(this.account).subscribe(
       response => {
         if(response.responseCode!=='01'){
-          console.log(response);
+          this.openSnackBar("Failed edit account");
         }else{
-          console.log(response);
+          this.openSnackBar("Edit account success", true);
         }
       }
     )

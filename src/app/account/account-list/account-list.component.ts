@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, AfterContentChecked } from '@angular/core';
 import { AccountService } from 'src/app/shared/service/account.service';
-import { MatDialog, MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
+import { MatDialog, MatPaginator, MatTableDataSource, MatSort, MatSnackBarConfig, MatSnackBar } from '@angular/material';
 import { AccountAddComponent } from '../account-add/account-add.component';
 import { Account } from 'src/app/shared/model/account';
 import { AccountEditComponent } from '../account-edit/account-edit.component';
@@ -22,7 +22,8 @@ export class AccountListComponent implements OnInit, AfterContentChecked {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private accountService: AccountService, public dialog: MatDialog) {  }
+  constructor(private accountService: AccountService, public dialog: MatDialog,
+    private snackBar: MatSnackBar) {  }
 
   accounts:Account;
 
@@ -88,14 +89,23 @@ export class AccountListComponent implements OnInit, AfterContentChecked {
     );
   }
 
+  openSnackBar(message: string, success?: boolean) {
+    let config = new MatSnackBarConfig();
+    // config.verticalPosition = 'bottom';
+    // config.horizontalPosition = 'center';
+    config.duration = 5000;
+    config.panelClass = success ? undefined : ['failed'];
+    this.snackBar.open(message, success ? undefined : 'Retry', config);
+  }
+
+
   delete(index) {
     this.accountService.deleteAccount(this.accounts[index].accountNumber).subscribe(
       response => {
         if(response.responseCode!=='01'){
-          console.log(response);
+          this.openSnackBar("Failed delete account")
         }else{
-          console.log(response);
-          window.location.reload();
+          this.openSnackBar("Deleted account successfully")
         }
       }
     )

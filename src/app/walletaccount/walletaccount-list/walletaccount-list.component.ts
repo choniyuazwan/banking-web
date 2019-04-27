@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { WalletAccount } from 'src/app/shared/model/wallet-account';
-import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatSort, MatDialog, MatSnackBarConfig, MatSnackBar } from '@angular/material';
 import { WalletAccountService } from 'src/app/shared/service/wallet-account.service';
 import { WalletaccountAddComponent } from '../walletaccount-add/walletaccount-add.component';
 
@@ -38,7 +38,8 @@ export class WalletaccountListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private walletAccountService: WalletAccountService, public dialog: MatDialog) {  }
+  constructor(private walletAccountService: WalletAccountService, public dialog: MatDialog,
+    private snackBar: MatSnackBar) {  }
 
   walletAccounts: WalletAccount;
 
@@ -74,13 +75,22 @@ export class WalletaccountListComponent implements OnInit {
     });
   }
 
+  openSnackBar(message: string, success?: boolean) {
+    let config = new MatSnackBarConfig();
+    // config.verticalPosition = 'bottom';
+    // config.horizontalPosition = 'center';
+    config.duration = 5000;
+    config.panelClass = success ? undefined : ['failed'];
+    this.snackBar.open(message, success ? undefined : 'Retry', config);
+  }
+
   delete(index) {
     this.walletAccountService.deleteWalletAccount(this.walletAccounts[index].id).subscribe(
       response => {
         if(response.responseCode!=='01'){
-          console.log(response.responseMessage);
+          this.openSnackBar("Failed unregister account")
         }else{
-          console.log(response.responseMessage);
+          this.openSnackBar("Unregister account success", true)
         }
       }
     )

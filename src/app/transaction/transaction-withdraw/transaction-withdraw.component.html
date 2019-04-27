@@ -24,7 +24,7 @@
           <div class="text-inside">
             <mat-form-field appearance="outline">
               <mat-label>Account Number</mat-label>
-              <input matInput formControlName="amount">
+              <input type="number" matInput formControlName="amount">
               <mat-error *ngIf="addCusForm.controls['amount'].hasError('required')">
                 Please enter balance
               </mat-error>
