@@ -13,9 +13,9 @@ import { UtilService } from 'src/app/shared/util/util.service';
 })
 export class WalletListComponent implements OnInit {
   
-  ngAfterContentChecked(): void {
-    this.calllist()
-  }
+  // ngAfterContentChecked(): void {
+  //   this.calllist()
+  // }
 
   calllist(){
     this.walletService.getWallets(localStorage.getItem('cif')).subscribe(

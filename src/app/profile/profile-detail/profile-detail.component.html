@@ -1,3 +1,17 @@
-<p>
-  profile-detail works!
-</p>
+<mat-card>
+  <h2>Profile</h2>
+  <div class="topright">
+      <mat-chip-list >
+          <mat-chip color="primary" selected (click)="edit()">Edit</mat-chip>
+      </mat-chip-list>
+  </div>
+
+
+  <mat-card-content>
+    <p><mat-label>First Name : {{customer.firstname}}</mat-label></p>
+    <p><mat-label>Last Name : {{customer.lastname}}</mat-label></p>
+    <p><mat-label>Birthdate : {{customer.birthdate}}</mat-label></p>
+    <p><mat-label>Email : {{customer.username}}</mat-label></p>
+    <p><mat-label>Password : ********</mat-label></p>
+  </mat-card-content>
+</mat-card>

@@ -10,9 +10,9 @@ import { WalletaccountAddComponent } from '../walletaccount-add/walletaccount-ad
   styleUrls: ['./walletaccount-list.component.css']
 })
 export class WalletaccountListComponent implements OnInit {
-  ngAfterContentChecked(): void {
-    this.calllist()
-  }
+  // ngAfterContentChecked(): void {
+  //   this.calllist()
+  // }
 
   calllist(){
     this.walletAccountService.getWalletAccounts(localStorage.getItem('cif')).subscribe(

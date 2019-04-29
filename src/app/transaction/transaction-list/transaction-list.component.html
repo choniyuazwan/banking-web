@@ -15,8 +15,8 @@
     <table mat-table [dataSource]="dataSource" matSort>
 
       <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
-        <td mat-cell *matCellDef="let row">{{row.id}} </td>
+        <th class="small" mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+        <td class="small" mat-cell *matCellDef="let row">{{row.id}} </td>
       </ng-container>
 
       <ng-container matColumnDef="type">

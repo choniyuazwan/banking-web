@@ -27,19 +27,19 @@ margin-right: 2px;
   }
   
 
-.example-button-row button {
+.example-button-row a {
   border-color: white;
   color: white;
   margin-right: 8px;
   margin-left: 5cm;
   margin-top: 1.3cm;
   margin-bottom: 10px;
-  width: 5cm;
+  width: 4cm;
   height: 1.5cm;
   font-size: 15pt;
   border-radius: 5px;
   display: flex;
-  
+  padding-top: 10px;
 }
 
 /* .background{

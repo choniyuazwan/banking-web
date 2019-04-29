@@ -13,9 +13,9 @@ import { Transaction } from 'src/app/shared/model/transaction';
 })
 export class TransactionListComponent implements OnInit {
 
-  ngAfterContentChecked(): void {
-    this.calllist()
-  }
+  // ngAfterContentChecked(): void {
+  //   this.calllist()
+  // }
 
   calllist(){
     this.transactionService.getTransactions(localStorage.getItem('cif')).subscribe(

@@ -11,10 +11,11 @@ import { AccountEditComponent } from '../account-edit/account-edit.component';
   templateUrl: './account-list.component.html',
   styleUrls: ['./account-list.component.css']
 })
-export class AccountListComponent implements OnInit, AfterContentChecked {
-  ngAfterContentChecked(): void {
-    this.calllist()
-  }
+export class AccountListComponent implements OnInit {
+
+  // ngAfterContentChecked(): void {
+  //   this.calllist()
+  // }
 
   displayedColumns: string[] = ['accountNumber', 'accountName', 'balance', 'openDate', 'edit', 'delete'];
   dataSource: MatTableDataSource<Account>;
@@ -37,8 +38,11 @@ export class AccountListComponent implements OnInit, AfterContentChecked {
           this.accounts = response.data;
         }
 
+
         let arrayAccounts = Object.keys(this.accounts).map(i => this.accounts[i])
         this.dataSource = new MatTableDataSource(arrayAccounts);
+
+        // console.log('banyak account = ' + arrayAccounts.length);
 
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
@@ -49,7 +53,7 @@ export class AccountListComponent implements OnInit, AfterContentChecked {
   add(): void {
     const dialogRef = this.dialog.open(AccountAddComponent,{
       width: '640px', disableClose: true ,
-    });
+    }).afterClosed().subscribe(result => this.calllist())
   }
 
   applyFilter(filterValue: string) {
@@ -70,13 +74,11 @@ export class AccountListComponent implements OnInit, AfterContentChecked {
   }
 
   calllist(){
-    
     this.accountService.getAccounts(localStorage.getItem('cif')).subscribe(
       response => {
         if (response.responseCode !== '01') {
           alert(response.responseMessage);
         } else {
-          // alert(JSON.stringify(response.data))
           this.accounts = response.data;
         }
 
@@ -103,9 +105,9 @@ export class AccountListComponent implements OnInit, AfterContentChecked {
     this.accountService.deleteAccount(this.accounts[index].accountNumber).subscribe(
       response => {
         if(response.responseCode!=='01'){
-          this.openSnackBar("Failed delete account")
+          this.openSnackBar(response.responseMessage)
         }else{
-          this.openSnackBar("Deleted account successfully")
+          this.openSnackBar("Success delete account", true)
         }
       }
     )

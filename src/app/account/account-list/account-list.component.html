@@ -14,8 +14,8 @@
   <table mat-table [dataSource]="dataSource" matSort>
 
     <ng-container matColumnDef="accountNumber">
-      <th mat-header-cell *matHeaderCellDef [ngClass]="'customWidthClass'" mat-sort-header> Account Number </th>
-      <td mat-cell *matCellDef="let row" [ngClass]="'customWidthClass'">{{row.accountNumber}} </td>
+      <th class="small" mat-header-cell *matHeaderCellDef [ngClass]="'customWidthClass'" mat-sort-header> Account Number </th>
+      <td class="small" mat-cell *matCellDef="let row" [ngClass]="'customWidthClass'">{{row.accountNumber}} </td>
     </ng-container>
 
     <ng-container matColumnDef="accountName">
@@ -34,8 +34,8 @@
     </ng-container>
 
     <ng-container matColumnDef="edit">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Edit </th>
-      <td mat-cell *matCellDef="let row">
+      <th class="small" mat-header-cell *matHeaderCellDef mat-sort-header> Edit </th>
+      <td class="small" mat-cell *matCellDef="let row">
         <button mat-icon-button color="accent" (click)="edit(dataSource.data.indexOf(row))">
           <mat-icon>edit</mat-icon>
         </button>
@@ -43,8 +43,8 @@
     </ng-container>
 
     <ng-container matColumnDef="delete">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Delete </th>
-      <td mat-cell *matCellDef="let row">
+      <th class="small" mat-header-cell *matHeaderCellDef mat-sort-header> Delete </th>
+      <td class="small" mat-cell *matCellDef="let row">
         <button mat-icon-button color="warn" (click)="delete(dataSource.data.indexOf(row))">
             <mat-icon>delete</mat-icon>
         </button>
