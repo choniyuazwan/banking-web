@@ -1,6 +1,6 @@
 <div>
     <div class="add-title">
-      <h3 class="primary">Add Account</h3>
+      <h3 class="primary">Register Account</h3>
     </div>
     <div>
       <form [formGroup]="addCusForm">
@@ -9,7 +9,7 @@
           <mat-grid-tile>
               <div class="text-inside">
                   <mat-form-field>
-                    <mat-label>Account Number</mat-label>
+                    <mat-label>Wallet</mat-label>
                     <mat-select formControlName="wallet">
                       <mat-option *ngFor="let wallet of wallets" [value]="wallet.id">
                         {{wallet.description}}

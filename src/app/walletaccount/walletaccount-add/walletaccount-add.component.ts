@@ -113,7 +113,7 @@ export class WalletaccountAddComponent implements OnInit {
     this.walletAccountService.addWalletAccount(walletAccount).subscribe(
       response => {
         if(response.responseCode!=='01'){
-          this.utilService.openSnackBar('Failed register account')
+          this.utilService.openSnackBar(response.responseMessage)
         }else{
           this.utilService.openSnackBar('Register account success', true)
         }

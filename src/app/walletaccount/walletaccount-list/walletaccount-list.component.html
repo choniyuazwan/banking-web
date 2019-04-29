@@ -22,8 +22,13 @@
           <td mat-cell *matCellDef="let row"> {{row.wallet.description}} </td>
         </ng-container>
 
+        <ng-container matColumnDef="accountNumber">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Account Number </th>
+          <td mat-cell *matCellDef="let row"> {{row.account.accountNumber}} </td>
+        </ng-container>
+
         <ng-container matColumnDef="account">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Account </th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Account Name </th>
           <td mat-cell *matCellDef="let row"> {{row.account.accountName}} </td>
         </ng-container>
 

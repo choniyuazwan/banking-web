@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatTableDataSource, MatPaginator, MatSort} from '@angular/material';
 import { WalletAddComponent } from '../wallet-add/wallet-add.component';
 import { Wallet } from 'src/app/shared/model/wallet';
@@ -26,6 +26,8 @@ export class WalletListComponent implements OnInit {
           this.wallets = response.data;
         }
 
+        this.changeDetectorRefs.detectChanges();
+
         let arrayWallets = Object.keys(this.wallets).map(i => this.wallets[i])
         this.dataSource = new MatTableDataSource(arrayWallets);
 
@@ -41,7 +43,7 @@ export class WalletListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private walletService: WalletService, public dialog: MatDialog, private utilService: UtilService) {  }
+  constructor(private walletService: WalletService, public dialog: MatDialog, private utilService: UtilService, private changeDetectorRefs: ChangeDetectorRef) {  }
 
   wallets:Wallet;
 
@@ -66,7 +68,7 @@ export class WalletListComponent implements OnInit {
   add(): void {
     const dialogRef = this.dialog.open(WalletAddComponent,{
       width: '640px', disableClose: true ,
-    });
+    }).afterClosed().subscribe(() => this.calllist())
   }
 
   applyFilter(filterValue: string) {
@@ -89,9 +91,11 @@ export class WalletListComponent implements OnInit {
   delete(index) {
     this.walletService.deleteWallet(this.wallets[index].id).subscribe(
       response => {
+        console.log('pesan response', response)
         if(response.responseCode!=='01'){
-          this.utilService.openSnackBar('Failed delete wallet')
+          this.utilService.openSnackBar(response.responseMessage)
         }else{
+          this.calllist();
           this.utilService.openSnackBar('Wallet has been deleted successfully', true)
         }
       }

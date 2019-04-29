@@ -32,7 +32,7 @@ export class WalletaccountListComponent implements OnInit {
     );
   }
 
-  displayedColumns: string[] = ['id', 'wallet', 'account', 'delete'];
+  displayedColumns: string[] = ['id', 'wallet', 'accountNumber', 'account', 'delete'];
   dataSource: MatTableDataSource<WalletAccount>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -90,6 +90,7 @@ export class WalletaccountListComponent implements OnInit {
         if(response.responseCode!=='01'){
           this.openSnackBar("Failed unregister account")
         }else{
+          this.calllist();
           this.openSnackBar("Unregister account success", true)
         }
       }

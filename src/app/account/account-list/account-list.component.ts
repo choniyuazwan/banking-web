@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterContentChecked, Injectable } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterContentChecked, Injectable, ChangeDetectorRef } from '@angular/core';
 import { AccountService } from 'src/app/shared/service/account.service';
 import { MatDialog, MatPaginator, MatTableDataSource, MatSort, MatSnackBarConfig, MatSnackBar } from '@angular/material';
 import { AccountAddComponent } from '../account-add/account-add.component';
@@ -32,7 +32,7 @@ export class AccountListComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private accountService: AccountService, public dialog: MatDialog,
-    private snackBar: MatSnackBar) {  }
+    private snackBar: MatSnackBar,  private changeDetectorRefs: ChangeDetectorRef) {  }
 
   accounts:Account;
 
@@ -90,11 +90,13 @@ export class AccountListComponent implements OnInit {
           this.accounts = response.data;
         }
 
+        // this.changeDetectorRefs.detectChanges();
+
         let arrayAccounts = Object.keys(this.accounts).map(i => this.accounts[i])
         this.dataSource = new MatTableDataSource(arrayAccounts);
-
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+ 
       }
     );
   }
@@ -115,6 +117,7 @@ export class AccountListComponent implements OnInit {
         if(response.responseCode!=='01'){
           this.openSnackBar(response.responseMessage)
         }else{
+          this.calllist();
           this.openSnackBar("Success delete account", true)
         }
       }
