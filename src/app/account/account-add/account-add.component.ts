@@ -7,6 +7,7 @@ import { Account } from 'src/app/shared/model/account';
 import { AccountService } from 'src/app/shared/service/account.service';
 import { Customer } from 'src/app/shared/model/customer';
 import {formatDate } from '@angular/common';
+import { AccountListComponent } from '../account-list/account-list.component';
 
 @Component({
   selector: 'app-account-add',
@@ -93,6 +94,9 @@ export class AccountAddComponent implements OnInit {
         if(response.responseCode!=='01'){
           this.openSnackBar("Failed add account");
         }else{
+          // this.router.navigate(['/dashboard']);
+          // this.router.navigate(['/accountlist']);
+          // this.accountList.calllist();
           this.openSnackBar("Add new account success", true);
         }
       }

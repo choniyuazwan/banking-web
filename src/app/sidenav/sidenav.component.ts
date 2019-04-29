@@ -1,6 +1,8 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { Router } from '@angular/router';
+import { CustomerService } from '../shared/service/customer.service';
+import { Customer } from '../shared/model/customer';
 
 @Component({
   selector: 'app-sidenav',
@@ -29,7 +31,7 @@ export class SidenavComponent implements OnInit {
 
   private _mobileQueryListener: () => void;
 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private router:Router) {
+  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private router:Router, private customerService:CustomerService) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
@@ -47,8 +49,19 @@ export class SidenavComponent implements OnInit {
   // shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));
   shouldRun = true;
 
+  customer:Customer = new Customer()
 
   ngOnInit() {
+    this.customerService.getCustomer(localStorage.getItem('cif')).subscribe(
+      response => {
+        if(response.responseCode!=='01'){
+          alert(JSON.stringify(response));
+        }else{
+          this.customer = response.data;
+          // console.log(this.customer)
+        }
+      }
+    )
   }
 
 }

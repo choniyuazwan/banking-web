@@ -1,10 +1,13 @@
-import { Component, OnInit, ViewChild, AfterContentChecked } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterContentChecked, Injectable } from '@angular/core';
 import { AccountService } from 'src/app/shared/service/account.service';
 import { MatDialog, MatPaginator, MatTableDataSource, MatSort, MatSnackBarConfig, MatSnackBar } from '@angular/material';
 import { AccountAddComponent } from '../account-add/account-add.component';
 import { Account } from 'src/app/shared/model/account';
 import { AccountEditComponent } from '../account-edit/account-edit.component';
 
+@Injectable({
+  providedIn: 'root'
+})
 
 @Component({
   selector: 'app-account-list',
@@ -14,6 +17,11 @@ import { AccountEditComponent } from '../account-edit/account-edit.component';
 export class AccountListComponent implements OnInit {
 
   // ngAfterContentChecked(): void {
+  //   this.calllist()
+  // }
+
+  // ngAfterViewChecked(): void {
+  //   console.log('proses refresh');
   //   this.calllist()
   // }
 
