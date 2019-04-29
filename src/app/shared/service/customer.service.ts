@@ -26,4 +26,9 @@ export class CustomerService {
     let url = `http://localhost:8080/customer/${cif}`;
     return this.httpClient.get<CommonResponse<Customer>>(url);
   }
+
+  editCustomer(customerData: Customer) {
+    let url = `http://localhost:8080/account/`;
+    return this.httpClient.patch<CommonResponse<Customer>>(url, customerData);
+  }
 }

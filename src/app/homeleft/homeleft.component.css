@@ -1,0 +1,42 @@
+  .f1{
+    color: white;
+    display: flex;
+    font-family: Arial narrow;
+    margin-right: 2px;
+      margin-left: 4cm;
+      margin-top: 1cm;
+      margin-bottom: 1px;
+    }
+    
+    .f2{
+      color: white;
+      display: flex;
+      font-family: Arial narrow;
+      margin-right: 2px;
+        margin-left: 4cm;
+        margin-top: 0cm;
+        margin-bottom: 1px;
+      }
+      
+    
+  .example-button-row a {
+    border-color: white;
+    color: white;
+    margin-right: 8px;
+    margin-left: 5cm;
+    margin-top: 1.3cm;
+    margin-bottom: 10px;
+    width: 4cm;
+    height: 1.5cm;
+    font-size: 15pt;
+    border-radius: 5px;
+    padding-top: 10px;
+  }
+  
+  .a {
+    color: azure;
+    font-family: forte;
+    background-size: cover
+  }
+  
+ 

@@ -28,6 +28,8 @@ import { DiscardComponent } from './discard/discard.component';
 import { AccountEditComponent } from './account/account-edit/account-edit.component';
 import { WalletEditComponent } from './wallet/wallet-edit/wallet-edit.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { HomeleftComponent } from './homeleft/homeleft.component';
+import { ProfileEditComponent } from './profile/profile-edit/profile-edit.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +55,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     AccountEditComponent,
     WalletEditComponent,
     DashboardComponent,
+    HomeleftComponent,
+    ProfileEditComponent,
   ],
   // exports: [AccountAddComponent, DiscardComponent],
   entryComponents: [

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomerService } from 'src/app/shared/service/customer.service';
 import { Customer } from 'src/app/shared/model/customer';
+import { MatDialog } from '@angular/material';
+import { ProfileEditComponent } from '../profile-edit/profile-edit.component';
 
 @Component({
   selector: 'app-profile-detail',
@@ -9,7 +11,7 @@ import { Customer } from 'src/app/shared/model/customer';
 })
 export class ProfileDetailComponent implements OnInit {
 
-  constructor(private customerService:CustomerService) { }
+  constructor(private customerService:CustomerService, public dialog: MatDialog) { }
 
   customer:Customer = new Customer();
 
@@ -28,11 +30,12 @@ export class ProfileDetailComponent implements OnInit {
   }
 
 
-
-
-
   edit() {
-    
+    const dialogRef = this.dialog.open(ProfileEditComponent,{
+      width: '640px', disableClose: true
+    });
   }
+
+
 
 }

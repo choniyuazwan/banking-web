@@ -129,7 +129,7 @@ export class TransactionTransferComponent implements OnInit {
         } else if(response.responseCode=='99'){
           this.openSnackBar(response.responseMessage);
         } else {
-          this.openSnackBar("Withdraw success", true);
+          this.openSnackBar("Transfer success", true);
         }
       }
     )
