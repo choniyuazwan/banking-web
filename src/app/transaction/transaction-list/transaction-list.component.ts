@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { TransactionTopupComponent } from '../transaction-topup/transaction-topup.component';
 import { TransactionTransferComponent } from '../transaction-transfer/transaction-transfer.component';
 import { TransactionWithdrawComponent } from '../transaction-withdraw/transaction-withdraw.component';
@@ -30,9 +30,14 @@ export class TransactionListComponent implements OnInit {
             console.log(element.accountCredit.accountNumber)
           }
         });
+
+        this.changeDetectorRefs.detectChanges();
+        this.changeDetectorRefs.detectChanges();
+
         this.dataSource = new MatTableDataSource(this.transactions);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+        this.changeDetectorRefs.detectChanges();
       }
     );
   }
@@ -43,7 +48,7 @@ export class TransactionListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private transactionService: TransactionService, public dialog: MatDialog) {  }
+  constructor(private transactionService: TransactionService, public dialog: MatDialog, private changeDetectorRefs:ChangeDetectorRef) {  }
 
   transactions: Transaction[];
 
@@ -78,18 +83,18 @@ export class TransactionListComponent implements OnInit {
   topup() {
     const dialogRef = this.dialog.open(TransactionTopupComponent,{
       width: '640px', disableClose: true ,
-    });
+    }).afterClosed().subscribe(() => this.calllist())
   }
 
   transfer() {
     const dialogRef = this.dialog.open(TransactionTransferComponent,{
       width: '640px', disableClose: true ,
-    });
+    }).afterClosed().subscribe(() => this.calllist())
   }
 
   withdraw() {
     const dialogRef = this.dialog.open(TransactionWithdrawComponent,{
       width: '640px', disableClose: true ,
-    });
+    }).afterClosed().subscribe(() => this.calllist())
   }
 }

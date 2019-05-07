@@ -11,18 +11,33 @@ export class WalletAccountService {
 
   constructor(private httpClient: HttpClient) { }
 
+  // getWalletAccounts(cif) {
+  //   let url = `http://localhost:8080/walletaccounts?cif=${cif}`;
+  //   return this.httpClient.get<CommonResponse<WalletAccount>>(url);
+  // }
+
+  // addWalletAccount(walletAccountData: WalletAccount): Observable<CommonResponse<WalletAccount>> {
+  //   let url = `http://localhost:8080/walletaccount/`;
+  //   return this.httpClient.post<CommonResponse<WalletAccount>>(url, walletAccountData);
+  // }
+
+  // deleteWalletAccount(id) {
+  //   let url = `http://localhost:8080/walletaccount/${id}`;
+  //   return this.httpClient.delete<CommonResponse<WalletAccount>>(url);
+  // }
+
   getWalletAccounts(cif) {
-    let url = `http://localhost:8080/walletaccounts?cif=${cif}`;
+    let url = `http:/api/walletaccounts?cif=${cif}`;
     return this.httpClient.get<CommonResponse<WalletAccount>>(url);
   }
 
   addWalletAccount(walletAccountData: WalletAccount): Observable<CommonResponse<WalletAccount>> {
-    let url = `http://localhost:8080/walletaccount/`;
+    let url = `http:/api/walletaccount/`;
     return this.httpClient.post<CommonResponse<WalletAccount>>(url, walletAccountData);
   }
 
   deleteWalletAccount(id) {
-    let url = `http://localhost:8080/walletaccount/${id}`;
+    let url = `http:/api/walletaccount/${id}`;
     return this.httpClient.delete<CommonResponse<WalletAccount>>(url);
   }
 }

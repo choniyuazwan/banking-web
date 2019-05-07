@@ -85,7 +85,7 @@ export class WalletListComponent implements OnInit {
       data: {
         id : this.wallets[index].id
       }
-    });
+    }).afterClosed().subscribe(() => this.calllist())
   }
 
   delete(index) {

@@ -78,7 +78,7 @@ export class AccountListComponent implements OnInit {
       data: {
         accountNumber : this.accounts[index].accountNumber
       }
-    });
+    }).afterClosed().subscribe(result => this.calllist())
   }
 
   calllist(){
@@ -90,7 +90,7 @@ export class AccountListComponent implements OnInit {
           this.accounts = response.data;
         }
 
-        // this.changeDetectorRefs.detectChanges();
+        this.changeDetectorRefs.detectChanges();
 
         let arrayAccounts = Object.keys(this.accounts).map(i => this.accounts[i])
         this.dataSource = new MatTableDataSource(arrayAccounts);

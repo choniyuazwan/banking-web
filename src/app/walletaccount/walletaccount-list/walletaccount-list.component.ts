@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { WalletAccount } from 'src/app/shared/model/wallet-account';
 import { MatTableDataSource, MatPaginator, MatSort, MatDialog, MatSnackBarConfig, MatSnackBar } from '@angular/material';
 import { WalletAccountService } from 'src/app/shared/service/wallet-account.service';
@@ -23,11 +23,15 @@ export class WalletaccountListComponent implements OnInit {
           this.walletAccounts = response.data;
         }
 
+        this.changeDetectorRefs.detectChanges();
+        this.changeDetectorRefs.detectChanges();
+        
         let arrayAccounts = Object.keys(this.walletAccounts).map(i => this.walletAccounts[i])
         this.dataSource = new MatTableDataSource(arrayAccounts);
 
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+        this.changeDetectorRefs.detectChanges();
       }
     );
   }
@@ -39,7 +43,7 @@ export class WalletaccountListComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private walletAccountService: WalletAccountService, public dialog: MatDialog,
-    private snackBar: MatSnackBar) {  }
+    private snackBar: MatSnackBar, private changeDetectorRefs: ChangeDetectorRef) {  }
 
   walletAccounts: WalletAccount;
 
@@ -72,7 +76,7 @@ export class WalletaccountListComponent implements OnInit {
   add() {
     const dialogRef = this.dialog.open(WalletaccountAddComponent,{
       width: '640px', disableClose: true ,
-    });
+    }).afterClosed().subscribe(() => this.calllist())
   }
 
   openSnackBar(message: string, success?: boolean) {

@@ -11,18 +11,33 @@ export class TransactionService {
 
   constructor(private httpClient: HttpClient) { }
 
+  // getTransactions(cif) {
+  //   let url = `http://localhost:8080/transactions?cif=${cif}`;
+  //   return this.httpClient.get<CommonResponse<Transaction[]>>(url);
+  // }
+
+  // addTransaction(transactionData: Transaction): Observable<CommonResponse<Transaction>> {
+  //   let url = `http://localhost:8080/transaction/`;
+  //   return this.httpClient.post<CommonResponse<Transaction>>(url, transactionData);
+  // }
+
+  // getTransaction(id) {
+  //   let url = `http://localhost:8080/transaction/${id}`;
+  //   return this.httpClient.get<CommonResponse<Transaction>>(url);
+  // }
+
   getTransactions(cif) {
-    let url = `http://localhost:8080/transactions?cif=${cif}`;
+    let url = `http:/api/transactions?cif=${cif}`;
     return this.httpClient.get<CommonResponse<Transaction[]>>(url);
   }
 
   addTransaction(transactionData: Transaction): Observable<CommonResponse<Transaction>> {
-    let url = `http://localhost:8080/transaction/`;
+    let url = `http:/api/transaction/`;
     return this.httpClient.post<CommonResponse<Transaction>>(url, transactionData);
   }
 
   getTransaction(id) {
-    let url = `http://localhost:8080/transaction/${id}`;
+    let url = `http:/api/transaction/${id}`;
     return this.httpClient.get<CommonResponse<Transaction>>(url);
   }
 }
