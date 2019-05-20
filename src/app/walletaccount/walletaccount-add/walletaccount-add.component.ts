@@ -103,8 +103,8 @@ export class WalletaccountAddComponent implements OnInit {
 
   add() {
     let walletAccount = new WalletAccount();
-    this.walletEntity.id = this.addCusForm.controls['wallet'].value;
-    this.accountEntity.accountNumber = this.addCusForm.controls['account'].value;
+    this.walletEntity.id = this.addCusForm.controls['wallet'].value.toString();
+    this.accountEntity.accountNumber = this.addCusForm.controls['account'].value.toString();
     this.customer.cif = localStorage.getItem('cif');
     walletAccount.wallet = this.walletEntity;
     walletAccount.account = this.accountEntity;
