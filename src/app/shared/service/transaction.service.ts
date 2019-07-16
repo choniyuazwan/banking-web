@@ -10,34 +10,36 @@ import { Observable } from 'rxjs';
 export class TransactionService {
 
   constructor(private httpClient: HttpClient) { }
-
-  // getTransactions(cif) {
-  //   let url = `http://localhost:8080/transactions?cif=${cif}`;
-  //   return this.httpClient.get<CommonResponse<Transaction[]>>(url);
-  // }
-
-  // addTransaction(transactionData: Transaction): Observable<CommonResponse<Transaction>> {
-  //   let url = `http://localhost:8080/transaction/`;
-  //   return this.httpClient.post<CommonResponse<Transaction>>(url, transactionData);
-  // }
-
-  // getTransaction(id) {
-  //   let url = `http://localhost:8080/transaction/${id}`;
-  //   return this.httpClient.get<CommonResponse<Transaction>>(url);
-  // }
+  
+  path = 'http://localhost:8080';
 
   getTransactions(cif) {
-    let url = `http:/api/transactions?cif=${cif}`;
+    let url = `${this.path}/transactions?cif=${cif}`;
     return this.httpClient.get<CommonResponse<Transaction[]>>(url);
   }
 
   addTransaction(transactionData: Transaction): Observable<CommonResponse<Transaction>> {
-    let url = `http:/api/transaction/`;
+    let url = `${this.path}/transaction/`;
     return this.httpClient.post<CommonResponse<Transaction>>(url, transactionData);
   }
 
   getTransaction(id) {
-    let url = `http:/api/transaction/${id}`;
+    let url = `${this.path}/transaction/${id}`;
     return this.httpClient.get<CommonResponse<Transaction>>(url);
   }
+
+  // getTransactions(cif) {
+  //   let url = `http:/api/transactions?cif=${cif}`;
+  //   return this.httpClient.get<CommonResponse<Transaction[]>>(url);
+  // }
+
+  // addTransaction(transactionData: Transaction): Observable<CommonResponse<Transaction>> {
+  //   let url = `http:/api/transaction/`;
+  //   return this.httpClient.post<CommonResponse<Transaction>>(url, transactionData);
+  // }
+
+  // getTransaction(id) {
+  //   let url = `http:/api/transaction/${id}`;
+  //   return this.httpClient.get<CommonResponse<Transaction>>(url);
+  // }
 }

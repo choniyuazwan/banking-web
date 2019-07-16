@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { FormsModule } from '@angular/forms';
 import { SidenavComponent } from './sidenav/sidenav.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginComponent } from './customer/login/login.component';
 import { RegisterComponent } from './customer/register/register.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
@@ -30,6 +30,7 @@ import { WalletEditComponent } from './wallet/wallet-edit/wallet-edit.component'
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeleftComponent } from './homeleft/homeleft.component';
 import { ProfileEditComponent } from './profile/profile-edit/profile-edit.component';
+import { BasicAuthService } from './shared/service/basic-auth.service';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,9 @@ import { ProfileEditComponent } from './profile/profile-edit/profile-edit.compon
     MaterialModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: BasicAuthService, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
